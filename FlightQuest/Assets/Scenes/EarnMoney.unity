@@ -598,12 +598,12 @@ GameObject:
   - component: {fileID: 940974989}
   - component: {fileID: 940974991}
   - component: {fileID: 940974990}
-  - component: {fileID: 940974997}
   - component: {fileID: 940974992}
   - component: {fileID: 940974993}
   - component: {fileID: 940974994}
   - component: {fileID: 940974996}
-  - component: {fileID: 940974995}
+  - component: {fileID: 940974998}
+  - component: {fileID: 940974997}
   m_Layer: 0
   m_Name: LightPlane
   m_TagString: Untagged
@@ -652,7 +652,6 @@ MonoBehaviour:
   accelerationCount: -1
   isLandingGearRemoved: 1
   isBurned: 0
-  floatingJoystick: {fileID: 258658658}
   planeCollider: {fileID: 771485828}
   groundLayerMask:
     serializedVersion: 2
@@ -729,18 +728,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd7281ebe369a54ab6f7dae7b6a206b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &940974995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 940974988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fb58e3f03de79b4080a0e91d21cf9fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &940974996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -762,29 +749,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 940974988}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93f8d29f2de81cd47ae5d2bb394d8eff, type: 3}
+  m_Script: {fileID: 11500000, guid: 74a04c53bd3157045a3e85c3ef0b84e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 0
-  currentSpeed: 0
-  lowMaxSpeed: 0
-  mediumMaxSpeed: 0
-  highMaxSpeed: 0
-  lowAcceleration: 0
-  mediumAcceleration: 0
-  highAcceleration: 0
-  currentAcceleration: 0
-  accelerationCount: 0
-  isLandingGearRemoved: 1
-  isBurned: 0
-  floatingJoystick: {fileID: 258658658}
-  planeCollider: {fileID: 771485828}
-  groundLayerMask:
-    serializedVersion: 2
-    m_Bits: 8
-  planeBodies:
-  - {fileID: 771485821}
-  - {fileID: 993703181}
+  joystick: {fileID: 258658658}
+--- !u!114 &940974998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940974988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa084ea77be2a3544b9d4e8f64303afc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  joystick: {fileID: 258658658}
 --- !u!1001 &957273454
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -996,6 +977,7 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 267352781}
+  - {fileID: 1556995783}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -1027,6 +1009,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 267352780}
+  - {fileID: 1556995784}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1119034909
@@ -1630,6 +1613,51 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.08465243
   m_Center: {x: 0.000000003725291, y: 0.000000026077032, z: -0.00000023841858}
+--- !u!1 &1556995782
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1556995784}
+  - component: {fileID: 1556995783}
+  m_Layer: 0
+  m_Name: PlaneStateInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1556995783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556995782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c253dfee52edb7c4c947481f81196697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundState: {fileID: 940974998}
+--- !u!4 &1556995784
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556995782}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1042077893}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1780954589
 PrefabInstance:
   m_ObjectHideFlags: 0
