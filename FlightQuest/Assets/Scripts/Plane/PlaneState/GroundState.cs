@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 namespace PlaneSection
 {
@@ -6,18 +7,19 @@ namespace PlaneSection
     {
         [SerializeField] private FloatingJoystick joystick;
 
-        private Rigidbody rb;
+        private Plane plane;
 
         private float horizontalInput;
-        private const float smoothLandSpeed = 0.9f;
+        private const float smoothLandSpeed = 0.4f;
 
-        private void Awake() => rb = GetComponent<Rigidbody>();
+        [Inject]
+        public void Construct(Plane plane) => this.plane = plane;
 
         public void Control()
         {
             InputOfJoystick();
             Vector3 rotation = new Vector3(0f, horizontalInput * smoothLandSpeed, 0f);
-            rb.MoveRotation(rb.rotation * Quaternion.Euler(rotation));
+            plane.rb.MoveRotation(plane.rb.rotation * Quaternion.Euler(rotation));
         }
 
         private void InputOfJoystick() => horizontalInput = joystick.Horizontal;
