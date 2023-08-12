@@ -12,11 +12,13 @@ namespace PlaneSection
 
         private void Start()
         {
+            maxPossibleSpeed = 300f;
+
             lowMaxSpeed = 30f;
             mediumMaxSpeed = 100f;
             highMaxSpeed = 200f;
 
-            lowAcceleration = 5;
+            lowAcceleration = 5f;
             mediumAcceleration = 20f;
             highAcceleration = 50f;
         }

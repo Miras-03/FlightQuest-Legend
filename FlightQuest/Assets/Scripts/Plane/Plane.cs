@@ -2,6 +2,7 @@ using UnityEngine;
 
 public abstract class Plane : MonoBehaviour
 {
+    [HideInInspector] public float maxPossibleSpeed;
     public float maxSpeed;
     public float currentSpeed = 0f;
 
@@ -19,7 +20,7 @@ public abstract class Plane : MonoBehaviour
     [HideInInspector] public bool isLandingGearRemoved = true;
     [HideInInspector] public bool isBurned = false;
 
-    protected Rigidbody rb;
+    [HideInInspector] public Rigidbody rb;
 
     public abstract void Move();
 }
