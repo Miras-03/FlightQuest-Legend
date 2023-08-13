@@ -10,7 +10,7 @@ namespace PlaneSection
         private Plane plane;
 
         private float horizontalInput;
-        private const float smoothLandSpeed = 0.4f;
+        private const float smoothLandSpeed = 0.1f;
 
         [Inject]
         public void Construct(Plane plane) => this.plane = plane;

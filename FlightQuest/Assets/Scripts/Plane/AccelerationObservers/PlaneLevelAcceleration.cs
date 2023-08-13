@@ -8,7 +8,7 @@ namespace PlaneSection
         public float AccelerationLevel { set => NotifyObservers(value); }
 
         public void AddOvserver(IAccelerationObserver observer) => accelerationObservers.Add(accelerationObservers.Count,observer);
-        public void RemoveObserver() => accelerationObservers.Remove(accelerationObservers.Count);
+        public void RemoveObserver() => accelerationObservers.Clear();
 
         private void NotifyObservers(float accelerationLevel)
         {

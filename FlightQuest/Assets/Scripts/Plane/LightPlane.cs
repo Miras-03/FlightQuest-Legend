@@ -5,8 +5,6 @@ namespace PlaneSection
     public class LightPlane : Plane
     {
         [SerializeField] private BoxCollider planeCollider;
-        [SerializeField] private LayerMask groundLayerMask;
-        [SerializeField] private GameObject[] planeBodies;
 
         private void Awake() => rb = GetComponent<Rigidbody>();
 
@@ -28,12 +26,12 @@ namespace PlaneSection
             if (currentSpeed > maxSpeed)
             {
                 float decelerationFactor = 30f;
-                currentSpeed = Mathf.MoveTowards(currentSpeed, maxSpeed, decelerationFactor * Time.fixedDeltaTime);
+                currentSpeed = Mathf.MoveTowards(currentSpeed, maxSpeed, decelerationFactor * Time.deltaTime);
             }
 
-            currentSpeed = Mathf.MoveTowards(currentSpeed, maxSpeed, currentAcceleration * Time.fixedDeltaTime);
+            currentSpeed = Mathf.MoveTowards(currentSpeed, maxSpeed, currentAcceleration * Time.deltaTime);
 
-            Vector3 movement = transform.forward * currentSpeed * Time.fixedDeltaTime;
+            Vector3 movement = transform.forward * currentSpeed * Time.deltaTime;
             rb.MovePosition(rb.position + movement);
         }
     }

@@ -14,7 +14,7 @@ public class PlaneEngine : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Point"))
+        if (!other.CompareTag("Point") && !other.CompareTag("Finish"))
         {
             plane.isBurned = true;
             ExchangeBody();

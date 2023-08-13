@@ -21,7 +21,7 @@ namespace PlaneSection
             flyingState = GetComponent<FlyingState>();
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             currentPlane.Move();
             if(!currentPlane.isBurned)

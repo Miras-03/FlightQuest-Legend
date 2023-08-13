@@ -28,7 +28,7 @@ namespace PlaneSection
         {
             const int lowPetrolLevel = 0;
             const int waitForSeconds = 1;
-            const int perLiter = 10;
+            const int perLiter = 5;
 
             while (petrolLitres > lowPetrolLevel)
             {
@@ -44,7 +44,7 @@ namespace PlaneSection
         private IEnumerator TimerForRestartGame()
         {
             isReachedThePoint = false;
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(5f);
             if (!isReachedThePoint)
                 SceneManager.RestartScene();
         }
@@ -64,7 +64,7 @@ namespace PlaneSection
 
         private void SetSpeed()
         {
-            if (plane.isLandingGearRemoved)
+            if (!plane.isLandingGearRemoved)
             {
                 plane.maxSpeed = plane.maxPossibleSpeed;
                 plane.currentSpeed = plane.maxPossibleSpeed;
