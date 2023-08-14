@@ -2,9 +2,11 @@ using PlaneSection;
 using UnityEngine;
 using Zenject;
 
-public class AccelerationManager : MonoBehaviour
+public sealed class AccelerationManager : MonoBehaviour
 {
     private PlaneLevelAcceleration accelerationLevel;
+
+    [Header("AccelerationObservers")]
     [SerializeField] private PropellerRotate propellerRotate;
 
     [Inject]

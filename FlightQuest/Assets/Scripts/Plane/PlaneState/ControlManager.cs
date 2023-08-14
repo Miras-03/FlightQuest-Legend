@@ -3,7 +3,7 @@ using Zenject;
 
 namespace PlaneSection
 {
-    public sealed class PlaneManager : MonoBehaviour
+    public sealed class ControlManager : MonoBehaviour, IDieable
     {
         private Plane currentPlane;
 
@@ -24,8 +24,7 @@ namespace PlaneSection
         private void Update()
         {
             currentPlane.Move();
-            if(!currentPlane.isBurned)
-                currentPlaneState.Control();
+            currentPlaneState.Control();
 
             UpdateStateBasedOnSpeed();
         }
@@ -39,5 +38,7 @@ namespace PlaneSection
         }
 
         private void ChangeState(IPlaneState newState) => currentPlaneState = newState;
+
+        public void ExecuteExplode() => Destroy(this);
     }
 }

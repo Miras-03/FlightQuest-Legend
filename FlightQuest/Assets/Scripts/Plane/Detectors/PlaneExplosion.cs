@@ -4,44 +4,37 @@ using Zenject;
 
 namespace PlaneSection
 {
-    public sealed class PlaneExplosion : MonoBehaviour
+    public sealed class PlaneExplosion : MonoBehaviour, IDieable
     {
         private Plane plane;
-
         [SerializeField] private GameObject[] planeBodies;
         [SerializeField] private GameObject[] buttons;
 
         [Inject]
-        public void Contruct(Plane plane) => this.plane = plane;
+        public void Construct(Plane plane) => this.plane = plane;
 
-        private void OnCollisionEnter()
+        public void ExecuteExplode()
         {
-            if (!plane.isLandingGearRemoved)
-            {
-                plane.isBurned = true;
-                ExchangeBody();
-                SetMaxSpeed();
-                DisableButtons();
-
-                StartCoroutine(TimerForRestartGame());
-            }
+            Explode();
+            DestroyButtons();
+            StartCoroutine(RestartAfterDelay());
         }
 
-        private void SetMaxSpeed() => plane.maxSpeed = plane.lowMaxSpeed;
-
-        private void ExchangeBody()
+        private void Explode()
         {
+            plane.isBurned = true;
             planeBodies[1].SetActive(true);
             planeBodies[0].SetActive(false);
+            plane.maxSpeed = plane.lowMaxSpeed;
         }
 
-        private void DisableButtons()
+        private void DestroyButtons()
         {
             foreach (GameObject button in buttons)
                 Destroy(button);
         }
 
-        private IEnumerator TimerForRestartGame()
+        private IEnumerator RestartAfterDelay()
         {
             yield return new WaitForSeconds(3f);
             SceneManager.RestartScene();

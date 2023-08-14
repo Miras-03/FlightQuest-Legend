@@ -4,10 +4,13 @@ using Zenject;
 
 public sealed class FinishManager : MonoBehaviour
 {
-    private FinishLine finishLine;
+    [Header("FinishObservers")]
     [SerializeField] private SpeedManager speedManager;
-    [SerializeField] private ExecuteFinishObservers confetti;
-    private MeshRenderer meshRenderer;
+    [SerializeField] private ConfettiManager confetti;
+    [SerializeField] private UIManager managerUI;
+    [SerializeField] private ExecuteFinishObserver finishLineObject;
+
+    private FinishLine finishLine;
 
     [Inject]
     public void Constructor(FinishLine finishLine)
@@ -16,15 +19,9 @@ public sealed class FinishManager : MonoBehaviour
 
         finishLine.AddObservers(speedManager);
         finishLine.AddObservers(confetti);
-
-        meshRenderer = GetComponent<MeshRenderer>();
+        finishLine.AddObservers(managerUI);
+        finishLine.AddObservers(finishLineObject);
     }
 
     private void OnDisable() => finishLine.RemoveObservers();
-
-    private void OnTriggerEnter()
-    {
-        finishLine.NotifyObserversAboutFinish();
-        meshRenderer.enabled = false;
-    }
 }

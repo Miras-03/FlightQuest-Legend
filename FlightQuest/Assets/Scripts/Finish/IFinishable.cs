@@ -1,4 +1,4 @@
 public interface IFinishable
 {
-    void Execute();  
+    void ExecuteFinish();  
 }

@@ -10,6 +10,6 @@ public sealed class FinishLine
     public void NotifyObserversAboutFinish()
     {
         foreach (IFinishable observer in observers.Values) 
-            observer.Execute();
+            observer.ExecuteFinish();
     }
 }

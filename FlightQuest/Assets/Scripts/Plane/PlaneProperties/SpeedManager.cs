@@ -51,12 +51,14 @@ namespace PlaneSection
             SetAcceleration();
         }
 
-        public void Execute()
+        private void SlowDown(float theSpeed)
         {
             plane.currentAcceleration = plane.lowAcceleration;
             accelerationLevel.AccelerationLevel = Mathf.Sqrt(plane.currentAcceleration);
 
-            plane.maxSpeed = 0;
+            plane.maxSpeed = theSpeed;
         }
+
+        public void ExecuteFinish() => SlowDown(0f);
     }
 }
