@@ -5,10 +5,9 @@ using Zenject;
 public sealed class FinishManager : MonoBehaviour
 {
     [Header("FinishObservers")]
-    [SerializeField] private SpeedManager speedManager;
-    [SerializeField] private ConfettiManager confetti;
+    [SerializeField] private ParticleSystemManager particleSystemManager;
     [SerializeField] private UIManager managerUI;
-    [SerializeField] private ExecuteFinishObserver finishLineObject;
+    [SerializeField] private SpeedManager speedManager;
 
     private FinishLine finishLine;
 
@@ -17,10 +16,9 @@ public sealed class FinishManager : MonoBehaviour
     {
         this.finishLine = finishLine;
 
-        finishLine.AddObservers(speedManager);
-        finishLine.AddObservers(confetti);
+        finishLine.AddObservers(particleSystemManager);
         finishLine.AddObservers(managerUI);
-        finishLine.AddObservers(finishLineObject);
+        finishLine.AddObservers(speedManager);
     }
 
     private void OnDisable() => finishLine.RemoveObservers();

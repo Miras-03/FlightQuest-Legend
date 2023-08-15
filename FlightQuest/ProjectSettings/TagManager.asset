@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Point
   - Water
+  - Ground
+  - LosePoint
+  - EnterPoint
   layers:
   - Default
   - TransparentFX

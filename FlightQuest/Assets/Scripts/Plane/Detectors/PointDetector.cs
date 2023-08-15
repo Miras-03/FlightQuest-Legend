@@ -7,44 +7,50 @@ namespace PlaneSection
 {
     public sealed class PointDetector : MonoBehaviour
     {
-        [SerializeField] private Button speedButton;
+        [SerializeField] private Button lever;
+        [SerializeField] private ParticleSystem selectionEffect;
 
         private Plane plane;
+        private PlaneLevelAcceleration accelerationLevel;
 
-        private int petrolLitres;
-
+        [SerializeField] private int petrolLitres;
         private bool isReachedThePoint = false;
 
+        private const int startingPetrolLitres = 100;
+        private const int perLiter = 5;
+        private const int lowPetrolLevel = 0;
+        private const int restartDelaySeconds = 5;
+
         [Inject]
-        public void Construct(Plane plane) => this.plane = plane;
+        public void Construct(Plane plane, PlaneLevelAcceleration accelerationLevel)
+        {
+            this.plane = plane;
+            this.accelerationLevel = accelerationLevel;
+        }
 
         private void Start()
         {
-            petrolLitres = 100;
+            petrolLitres = startingPetrolLitres;
             StartCoroutine(OffLitresTimer());
         }
 
         public IEnumerator OffLitresTimer()
         {
-            const int lowPetrolLevel = 0;
-            const int waitForSeconds = 1;
-            const int perLiter = 5;
-
             while (petrolLitres > lowPetrolLevel)
             {
-                yield return new WaitForSeconds(waitForSeconds);
+                yield return new WaitForSeconds(1);
                 petrolLitres -= perLiter;
             }
 
-            speedButton.interactable = false;
-            plane.maxSpeed = plane.lowMaxSpeed;
+            SetDefaultSpeed();
+            lever.interactable = false;
             StartCoroutine(TimerForRestartGame());
         }
 
         private IEnumerator TimerForRestartGame()
         {
             isReachedThePoint = false;
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(restartDelaySeconds);
             if (!isReachedThePoint)
                 SceneManager.RestartScene();
         }
@@ -54,26 +60,23 @@ namespace PlaneSection
             if (other.CompareTag("Point"))
             {
                 isReachedThePoint = true;
-                petrolLitres = 100;
-                speedButton.interactable = true;
+                selectionEffect.Play();
+                petrolLitres = startingPetrolLitres;
+                lever.interactable = true;
                 SetSpeed();
                 Destroy(other.gameObject);
                 StartCoroutine(OffLitresTimer());
             }
         }
 
-        private void SetSpeed()
+        private void SetSpeed() => plane.maxSpeed = !plane.isLandingGearRemoved ? plane.maxPossibleSpeed : plane.highMaxSpeed;
+
+        private void SetDefaultSpeed()
         {
-            if (!plane.isLandingGearRemoved)
-            {
-                plane.maxSpeed = plane.maxPossibleSpeed;
-                plane.currentSpeed = plane.maxPossibleSpeed;
-            }
-            else
-            {
-                plane.maxSpeed = plane.highMaxSpeed;
-                plane.currentSpeed = plane.highMaxSpeed;
-            }
+            plane.maxSpeed = plane.lowMaxSpeed;
+            accelerationLevel.AccelerationLevel = Mathf.Sqrt(plane.lowAcceleration);
         }
+
+        public void BreakDown() => Destroy(this);
     }
 }

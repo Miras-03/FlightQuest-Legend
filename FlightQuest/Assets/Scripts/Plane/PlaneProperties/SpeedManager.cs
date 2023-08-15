@@ -4,7 +4,7 @@ using Zenject;
 
 namespace PlaneSection
 {
-    public sealed class SpeedManager : MonoBehaviour, IFinishable
+    public sealed class SpeedManager : MonoBehaviour, IDieable, IFinishable
     {
         private Plane plane;
         private PlaneLevelAcceleration accelerationLevel;
@@ -53,11 +53,13 @@ namespace PlaneSection
 
         private void SlowDown(float theSpeed)
         {
-            plane.currentAcceleration = plane.lowAcceleration;
-            accelerationLevel.AccelerationLevel = Mathf.Sqrt(plane.currentAcceleration);
+            float lowAcceleration = plane.lowAcceleration;
+            accelerationLevel.AccelerationLevel = Mathf.Sqrt(lowAcceleration);
 
             plane.maxSpeed = theSpeed;
         }
+
+        public void ExecuteExplode() => SlowDown(plane.lowMaxSpeed);
 
         public void ExecuteFinish() => SlowDown(0f);
     }

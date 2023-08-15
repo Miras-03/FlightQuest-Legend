@@ -8,7 +8,6 @@ namespace PlaneSection
     {
         private Plane plane;
         [SerializeField] private GameObject[] planeBodies;
-        [SerializeField] private GameObject[] buttons;
 
         [Inject]
         public void Construct(Plane plane) => this.plane = plane;
@@ -16,7 +15,6 @@ namespace PlaneSection
         public void ExecuteExplode()
         {
             Explode();
-            DestroyButtons();
             StartCoroutine(RestartAfterDelay());
         }
 
@@ -26,12 +24,6 @@ namespace PlaneSection
             planeBodies[1].SetActive(true);
             planeBodies[0].SetActive(false);
             plane.maxSpeed = plane.lowMaxSpeed;
-        }
-
-        private void DestroyButtons()
-        {
-            foreach (GameObject button in buttons)
-                Destroy(button);
         }
 
         private IEnumerator RestartAfterDelay()

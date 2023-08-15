@@ -1,11 +1,14 @@
+using TMPro;
 using UnityEngine;
 using Zenject;
 
 namespace PlaneSection
 {
-    public sealed class ControlManager : MonoBehaviour, IDieable
+    public sealed class ControlManager : MonoBehaviour
     {
-        private Plane currentPlane;
+        [SerializeField] private TextMeshProUGUI speedIndicator;
+
+        private Plane plane;
 
         private IPlaneState currentPlaneState;
 
@@ -16,29 +19,31 @@ namespace PlaneSection
         public void Contruct(IPlaneState planeState, Plane plane)
         {
             currentPlaneState = planeState;
-            currentPlane = plane;
+            this.plane = plane;
+
             groundState = GetComponent<GroundState>();
             flyingState = GetComponent<FlyingState>();
         }
 
         private void Update()
         {
-            currentPlane.Move();
-            currentPlaneState.Control();
+            plane.Move();
+            if (!plane.isBurned)
+                currentPlaneState.Control();
 
             UpdateStateBasedOnSpeed();
+
+            speedIndicator.text = $"Speed\n   {(int)plane.currentSpeed}";
         }
 
         private void UpdateStateBasedOnSpeed()
         {
-            if (currentPlane.currentSpeed > currentPlane.lowMaxSpeed)
+            if (plane.currentSpeed > plane.lowMaxSpeed)
                 ChangeState(flyingState);
             else
                 ChangeState(groundState);
         }
 
         private void ChangeState(IPlaneState newState) => currentPlaneState = newState;
-
-        public void ExecuteExplode() => Destroy(this);
     }
 }

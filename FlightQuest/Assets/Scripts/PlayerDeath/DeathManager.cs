@@ -8,7 +8,8 @@ public sealed class DeathManager : MonoBehaviour
 
     [Header("DeathObservers")]
     [SerializeField] private PlaneExplosion planeExplosion;
-    [SerializeField] private ControlManager controlManager;
+    [SerializeField] private ParticleSystemManager particleSystemManager;
+    [SerializeField] private SpeedManager speedManager;
 
     [Inject]
     public void Constructor(PlayerDeath playerDeath)
@@ -16,7 +17,8 @@ public sealed class DeathManager : MonoBehaviour
         this.playerDeath = playerDeath;
 
         playerDeath.AddObservers(planeExplosion);
-        playerDeath.AddObservers(controlManager);
+        playerDeath.AddObservers(speedManager);
+        playerDeath.AddObservers(particleSystemManager);
     }
 
     private void OnDisable() => playerDeath.RemoveObservers();

@@ -3,11 +3,11 @@ using UnityEngine;
 public class ShipSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject prefabToSpawn;
-    private const int numberOfPrefabsToSpawn = 3;
-    private const float distance = 7000f;
+    private const int numberOfPrefabsToSpawn = 5;
+    private const float distance = 4000f;
 
-    private const float minX = -1500f;
-    private const float maxX = 1500f;
+    private const float minX = -500f;
+    private const float maxX = 500f;
     private const float yCoordinate = 0f;
     private float zCoordinate = 0f;
 

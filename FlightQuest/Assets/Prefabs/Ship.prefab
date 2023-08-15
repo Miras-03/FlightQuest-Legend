@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 7499369083090810972}
   - component: {fileID: 9026374654733029918}
   - component: {fileID: 5256820062356326116}
-  - component: {fileID: 7891314160603273383}
+  - component: {fileID: 8835145141160198127}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -358,9 +358,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1.35
-  m_Height: 17.95
+  m_Height: 13
   m_Direction: 2
-  m_Center: {x: -0.0003146529, y: 1.34, z: -0.0000004768465}
+  m_Center: {x: -0.0003146529, y: 0.46, z: 1.8}
 --- !u!136 &5256820062356326116
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -381,11 +381,11 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 2.04
-  m_Height: 9.21
+  m_Height: 7
   m_Direction: 2
-  m_Center: {x: -0.0003146529, y: 2.79, z: -1.39}
---- !u!136 &7891314160603273383
-CapsuleCollider:
+  m_Center: {x: -0.0003146529, y: 1.55, z: -0.99}
+--- !u!65 &8835145141160198127
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -402,8 +402,6 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.06
-  m_Height: 5.37
-  m_Direction: 1
-  m_Center: {x: -0.0003146529, y: 5.54, z: -4.11}
+  serializedVersion: 3
+  m_Size: {x: 3.9035695, y: 1, z: 5}
+  m_Center: {x: -0.0003146529, y: 0.48, z: -6.75}
