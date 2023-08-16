@@ -11,7 +11,7 @@ public sealed class ExecuteDiableObservers : MonoBehaviour
     [Inject]
     public void Construct(PlayerDeath playerDeath) => this.playerDeath = playerDeath;
 
-    private static readonly HashSet<string> excludedTags = new HashSet<string> { "Point", "Finish", "Ground", "LosePoint", "EnterPoint" };
+    private readonly HashSet<string> excludedTags = new HashSet<string> { "Point", "Finish", "Ground", "LosePoint", "EnterPoint", "Landing" };
 
     private void OnTriggerEnter(Collider other)
     {

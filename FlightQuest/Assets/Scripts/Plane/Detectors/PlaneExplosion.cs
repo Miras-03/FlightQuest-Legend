@@ -9,6 +9,8 @@ namespace PlaneSection
         private Plane plane;
         [SerializeField] private GameObject[] planeBodies;
 
+        private const int lowSpeed = 10;
+
         [Inject]
         public void Construct(Plane plane) => this.plane = plane;
 
@@ -23,7 +25,7 @@ namespace PlaneSection
             plane.isBurned = true;
             planeBodies[1].SetActive(true);
             planeBodies[0].SetActive(false);
-            plane.maxSpeed = plane.lowMaxSpeed;
+            plane.maxSpeed = lowSpeed;
         }
 
         private IEnumerator RestartAfterDelay()

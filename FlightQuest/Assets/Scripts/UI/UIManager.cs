@@ -4,8 +4,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour, IFinishable, IDieable
 {
     [SerializeField] private GameObject finishPanel;
-    [SerializeField] private GameObject pausePanel;
-    [SerializeField] private GameObject[] buttons;
+    [SerializeField] private GameObject[] objectsOfUI;
 
     public void ExecuteFinish()
     {
@@ -23,7 +22,7 @@ public class UIManager : MonoBehaviour, IFinishable, IDieable
 
     private void DestroyButtons()
     {
-        foreach (GameObject button in buttons)
+        foreach (GameObject button in objectsOfUI)
             Destroy(button);
     }   
 }

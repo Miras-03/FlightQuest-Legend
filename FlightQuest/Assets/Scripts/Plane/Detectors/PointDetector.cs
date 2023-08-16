@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,25 +8,28 @@ namespace PlaneSection
 {
     public sealed class PointDetector : MonoBehaviour
     {
-        [SerializeField] private Button lever;
+        [SerializeField] private Slider lever;
         [SerializeField] private ParticleSystem selectionEffect;
+
+        [SerializeField] private ExecuteFinishObservers executeFinishObserver;
 
         private Plane plane;
         private PlaneLevelAcceleration accelerationLevel;
+        private Rigidbody rb;
 
         [SerializeField] private int petrolLitres;
-        private bool isReachedThePoint = false;
 
         private const int startingPetrolLitres = 100;
-        private const int perLiter = 5;
+        private const int perLiter = 10;
         private const int lowPetrolLevel = 0;
-        private const int restartDelaySeconds = 5;
 
         [Inject]
         public void Construct(Plane plane, PlaneLevelAcceleration accelerationLevel)
         {
             this.plane = plane;
             this.accelerationLevel = accelerationLevel;
+
+            rb = GetComponent<Rigidbody>();
         }
 
         private void Start()
@@ -42,39 +46,39 @@ namespace PlaneSection
                 petrolLitres -= perLiter;
             }
 
+            StartCoroutine(WaitForDelay());
             SetDefaultSpeed();
-            lever.interactable = false;
-            StartCoroutine(TimerForRestartGame());
+            lever.onValueChanged.RemoveAllListeners();
         }
 
-        private IEnumerator TimerForRestartGame()
+        private IEnumerator WaitForDelay()
         {
-            isReachedThePoint = false;
-            yield return new WaitForSeconds(restartDelaySeconds);
-            if (!isReachedThePoint)
-                SceneManager.RestartScene();
+            yield return new WaitForSeconds(5);
+            SceneManager.RestartScene();
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Point"))
             {
-                isReachedThePoint = true;
                 selectionEffect.Play();
-                petrolLitres = startingPetrolLitres;
-                lever.interactable = true;
-                SetSpeed();
+                SetValue();
                 Destroy(other.gameObject);
                 StartCoroutine(OffLitresTimer());
             }
         }
 
-        private void SetSpeed() => plane.maxSpeed = !plane.isLandingGearRemoved ? plane.maxPossibleSpeed : plane.highMaxSpeed;
+        private void SetValue()
+        {
+            lever.interactable = true;
+            petrolLitres = startingPetrolLitres;
+        }
 
         private void SetDefaultSpeed()
         {
-            plane.maxSpeed = plane.lowMaxSpeed;
-            accelerationLevel.AccelerationLevel = Mathf.Sqrt(plane.lowAcceleration);
+            plane.maxSpeed = 0;
+            accelerationLevel.AccelerationLevel = 0;
+            rb.drag = 0;
         }
 
         public void BreakDown() => Destroy(this);

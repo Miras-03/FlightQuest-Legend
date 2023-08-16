@@ -1,10 +1,15 @@
 using Zenject;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LandingGear : MonoBehaviour
 {
     private Plane plane;
     private Animator anim;
+
+    [SerializeField] private Slider lever;
+
+    private float forceSpeed = 100f;
 
     [Inject]
     public void Contruct(Plane plane)
@@ -16,17 +21,24 @@ public class LandingGear : MonoBehaviour
     public void SetLandingGear()
     {
         plane.isLandingGearRemoved = !plane.isLandingGearRemoved;
-
-        float landingGearWeight = 100f;
         if (!plane.isLandingGearRemoved)
         {
             anim.Play("PullUp");
-            plane.maxSpeed += landingGearWeight;
+            plane.maxSpeed += forceSpeed;
+            SetLeverValue();
         }
         else
         {
             anim.Play("PullDown");
-            plane.maxSpeed -= landingGearWeight;
+            plane.maxSpeed -= forceSpeed;
+            SetLeverValue();
         }
+    }
+
+    private void SetLeverValue()
+    {
+        float maxSpeed = plane.maxSpeed;
+        lever.maxValue = maxSpeed;
+        lever.value = maxSpeed;
     }
 }

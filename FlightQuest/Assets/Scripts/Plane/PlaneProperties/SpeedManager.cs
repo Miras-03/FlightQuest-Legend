@@ -1,66 +1,73 @@
-using System.Collections;
+using CameraOption;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace PlaneSection
 {
     public sealed class SpeedManager : MonoBehaviour, IDieable, IFinishable
     {
+        [SerializeField] private Slider speedLever;
+        [SerializeField] private GameObject[] objectsOfUI;
+
         private Plane plane;
         private PlaneLevelAcceleration accelerationLevel;
+        [SerializeField] private CameraManager cameraManager;
 
-        private bool isReached = false;
+        private bool isCameraEnabled = false;
 
         [Inject]
         public void Contruct(Plane plane, PlaneLevelAcceleration accelerationLevel)
         {
             this.plane = plane;
             this.accelerationLevel = accelerationLevel;
+
+            speedLever.onValueChanged.AddListener(SetAcceleration);
         }
 
         private void Start()
         {
-            plane.accelerationCount = -1;
-            StartCoroutine(CallSetAcceleration());
+            plane.maxPossibleSpeed = 250;
+            plane.speedAcceleration = 30;
+            plane.decelerationFactor = 30;
+
+            speedLever.minValue = 0;
+            speedLever.maxValue = plane.maxPossibleSpeed;
         }
 
-        public void SetAcceleration()
+        public void SetAcceleration(float newSpeed)
         {
-            if (!isReached)
+            if (!isCameraEnabled)
             {
-                plane.accelerationCount = (plane.accelerationCount + 1) % 3;
-                if (plane.accelerationCount == 2)
-                    isReached = !isReached;
-            }
-            else
-            {
-                plane.accelerationCount = (plane.accelerationCount + 2) % 3;
-                if (plane.accelerationCount == 0)
-                    isReached = !isReached;
+                SetUIObjects();
+                SetCamera();
             }
 
-            plane.currentAcceleration = plane.accelerationCount == 0 ? plane.lowAcceleration : (plane.accelerationCount == 1 ? plane.mediumAcceleration : plane.highAcceleration);
-            plane.maxSpeed = plane.accelerationCount == 0 ? plane.lowMaxSpeed : (plane.accelerationCount == 1 ? plane.mediumMaxSpeed : plane.highMaxSpeed);
+            plane.maxSpeed = newSpeed;
 
-            accelerationLevel.AccelerationLevel = Mathf.Sqrt(plane.currentAcceleration);
+            accelerationLevel.AccelerationLevel = Mathf.Sqrt(newSpeed);
         }
 
-        private IEnumerator CallSetAcceleration()
+        private void SetCamera()
         {
-            yield return new WaitForSeconds(1f);
-            SetAcceleration();
+            isCameraEnabled = !isCameraEnabled;
+            cameraManager.enabled = isCameraEnabled;
+        }
+
+        private void SetUIObjects()
+        {
+            objectsOfUI[0].SetActive(false);
+            objectsOfUI[1].SetActive(true);
         }
 
         private void SlowDown(float theSpeed)
         {
-            float lowAcceleration = plane.lowAcceleration;
-            accelerationLevel.AccelerationLevel = Mathf.Sqrt(lowAcceleration);
-
+            accelerationLevel.AccelerationLevel = 5;
             plane.maxSpeed = theSpeed;
         }
 
-        public void ExecuteExplode() => SlowDown(plane.lowMaxSpeed);
+        public void ExecuteExplode() => SlowDown(10);
 
-        public void ExecuteFinish() => SlowDown(0f);
+        public void ExecuteFinish() => SlowDown(0);
     }
 }

@@ -72,6 +72,5 @@ namespace CameraOption
             locationOffset = targetLocationOffset;
             rotationOffset = targetRotationOffset;
         }
-
     }
 }

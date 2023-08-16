@@ -2,14 +2,14 @@ using System.Collections.Generic;
 
 public sealed class FinishLine
 {
-    private Dictionary<int, IFinishable> observers = new Dictionary<int, IFinishable>();
+    private HashSet<IFinishable> observers = new HashSet<IFinishable>();
 
-    public void AddObservers(IFinishable observer) => observers.Add(observers.Count, observer);
+    public void AddObservers(IFinishable observer) => observers.Add(observer);
     public void RemoveObservers() => observers.Clear();
 
     public void NotifyObserversAboutFinish()
     {
-        foreach (IFinishable observer in observers.Values) 
+        foreach (IFinishable observer in observers) 
             observer.ExecuteFinish();
     }
 }

@@ -14,8 +14,8 @@ public sealed class ExecuteFinishObservers : MonoBehaviour
 
     [Inject] private FinishLine finishLine;
     private bool gotIn = false;
-    [HideInInspector] public bool isReached = false;
-    [HideInInspector] public bool isReachedFinishLine = false;
+    [HideInInspector] public bool isReachedLosePoint = false;
+    [HideInInspector] public bool isReachedFinishPoint = false;
 
     private int time = 5;
     private const int endTime = 0;
@@ -37,7 +37,7 @@ public sealed class ExecuteFinishObservers : MonoBehaviour
 
     private void DestroyFinishLine()
     {
-        isReachedFinishLine = true;
+        isReachedFinishPoint = true;
 
         Destroy(meshRenderer);
         Destroy(spriteRenderer);
@@ -55,8 +55,7 @@ public sealed class ExecuteFinishObservers : MonoBehaviour
             time -= perSeconds;
         }
         waitForTimeIndicator.enabled = false;
-
-        if (!isReached)
+        if (!isReachedLosePoint)
             finishLine.NotifyObserversAboutFinish();
         else
             SceneManager.RestartScene();

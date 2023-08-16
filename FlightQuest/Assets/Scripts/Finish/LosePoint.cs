@@ -1,16 +1,12 @@
-using System.Collections;
 using UnityEngine;
-using Zenject;
 
 public sealed class LosePoint : MonoBehaviour
 {
-    private ExecuteFinishObservers executeFinishObserver;
-
-    private void Awake() => executeFinishObserver = GetComponentInParent<ExecuteFinishObservers>();
+    [SerializeField] private ExecuteFinishObservers executeFinishObserver;
 
     private void OnTriggerEnter()
     {
-        executeFinishObserver.isReached = true;
+        executeFinishObserver.isReachedLosePoint = true;
         executeFinishObserver.waitForTimeIndicator.enabled = false;
     }
 }

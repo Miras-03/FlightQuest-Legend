@@ -12,8 +12,8 @@ public class EnterPoint : MonoBehaviour
 
     private IEnumerator WaitForLose()
     {
-        yield return new WaitForSeconds(10);
-        if (!executeFinishObserver.isReachedFinishLine)
+        yield return new WaitForSeconds(20);
+        if (!executeFinishObserver.isReachedFinishPoint)
             SceneManager.RestartScene();
     }
 }
