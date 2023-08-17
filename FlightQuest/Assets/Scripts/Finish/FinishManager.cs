@@ -8,6 +8,7 @@ public sealed class FinishManager : MonoBehaviour
     [SerializeField] private ParticleSystemManager particleSystemManager;
     [SerializeField] private UIManager managerUI;
     [SerializeField] private SpeedManager speedManager;
+    [SerializeField] private LevelManager levelManager;
 
     private FinishLine finishLine;
 
@@ -19,6 +20,7 @@ public sealed class FinishManager : MonoBehaviour
         finishLine.AddObservers(particleSystemManager);
         finishLine.AddObservers(managerUI);
         finishLine.AddObservers(speedManager);
+        finishLine.AddObservers(levelManager);
     }
 
     private void OnDisable() => finishLine.RemoveObservers();

@@ -12,6 +12,7 @@ namespace PlaneSection
 
         private Plane plane;
         private PlaneLevelAcceleration accelerationLevel;
+        private PointDetector pointDetector;
         [SerializeField] private CameraManager cameraManager;
 
         private bool isCameraEnabled = false;
@@ -21,6 +22,8 @@ namespace PlaneSection
         {
             this.plane = plane;
             this.accelerationLevel = accelerationLevel;
+
+            pointDetector = GetComponent<PointDetector>();
 
             speedLever.onValueChanged.AddListener(SetAcceleration);
         }
@@ -41,12 +44,15 @@ namespace PlaneSection
             {
                 SetUIObjects();
                 SetCamera();
+                TurnPointDetectorOn();
             }
 
             plane.maxSpeed = newSpeed;
 
             accelerationLevel.AccelerationLevel = Mathf.Sqrt(newSpeed);
         }
+
+        private void TurnPointDetectorOn() => pointDetector.enabled = true;
 
         private void SetCamera()
         {

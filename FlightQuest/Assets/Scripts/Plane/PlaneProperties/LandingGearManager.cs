@@ -1,9 +1,11 @@
 using CameraOption;
+using PlaneSection;
 using UnityEngine;
 
 public class LandingGearManager : MonoBehaviour
 {
-    [SerializeField] CameraManager cameraManager;
+    [SerializeField] private CameraManager cameraManager;
+    [SerializeField] private PointDetector pointDetector;
     [SerializeField] private LandingGear landingGear;
 
     private bool isEntered = false;
@@ -14,6 +16,7 @@ public class LandingGearManager : MonoBehaviour
         {
             landingGear.SetLandingGear();
             cameraManager.ChangeCameraCoord();
+            Destroy(pointDetector);
             isEntered = !isEntered;
         }
     }

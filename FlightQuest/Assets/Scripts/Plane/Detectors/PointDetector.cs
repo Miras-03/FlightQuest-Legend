@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,43 +11,52 @@ namespace PlaneSection
         [SerializeField] private ParticleSystem selectionEffect;
 
         [SerializeField] private ExecuteFinishObservers executeFinishObserver;
+        [SerializeField] private PetrolLevel petrolLevel;
 
         private Plane plane;
         private PlaneLevelAcceleration accelerationLevel;
-        private Rigidbody rb;
 
-        [SerializeField] private int petrolLitres;
+        private Coroutine petrolCoroutine;
+
+        [SerializeField] private float petrolLitres;
 
         private const int startingPetrolLitres = 100;
-        private const int perLiter = 10;
+        private const float perLiter = 0.01f;
         private const int lowPetrolLevel = 0;
+
+        private bool isFailed = false;
 
         [Inject]
         public void Construct(Plane plane, PlaneLevelAcceleration accelerationLevel)
         {
             this.plane = plane;
             this.accelerationLevel = accelerationLevel;
-
-            rb = GetComponent<Rigidbody>();
         }
 
         private void Start()
         {
-            petrolLitres = startingPetrolLitres;
+            SetMaxValueForPetrol();
             StartCoroutine(OffLitresTimer());
         }
 
-        public IEnumerator OffLitresTimer()
+        private IEnumerator OffLitresTimer()
         {
             while (petrolLitres > lowPetrolLevel)
             {
-                yield return new WaitForSeconds(1);
-                petrolLitres -= perLiter;
+                yield return new WaitForEndOfFrame();
+                DecreasePetrolLevel();
             }
 
+            isFailed = true;
             StartCoroutine(WaitForDelay());
             SetDefaultSpeed();
             lever.onValueChanged.RemoveAllListeners();
+        }
+
+        private void DecreasePetrolLevel()
+        {
+            petrolLitres -= perLiter;
+            petrolLevel.SetPetrolLevel(perLiter);
         }
 
         private IEnumerator WaitForDelay()
@@ -59,26 +67,34 @@ namespace PlaneSection
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Point"))
+            if (other.CompareTag("Point") && !isFailed)
             {
                 selectionEffect.Play();
                 SetValue();
                 Destroy(other.gameObject);
-                StartCoroutine(OffLitresTimer());
+
+                if (petrolCoroutine != null)
+                    StopCoroutine(petrolCoroutine);
+                petrolCoroutine = StartCoroutine(OffLitresTimer());
             }
+        }
+
+        private void SetMaxValueForPetrol()
+        {
+            petrolLitres = startingPetrolLitres;
+            petrolLevel.SetMaxLevel = startingPetrolLitres;
         }
 
         private void SetValue()
         {
-            lever.interactable = true;
             petrolLitres = startingPetrolLitres;
+            petrolLevel.SetMaxLevel = startingPetrolLitres;
         }
 
         private void SetDefaultSpeed()
         {
             plane.maxSpeed = 0;
             accelerationLevel.AccelerationLevel = 0;
-            rb.drag = 0;
         }
 
         public void BreakDown() => Destroy(this);

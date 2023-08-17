@@ -10,7 +10,7 @@ public sealed class ExecuteFinishObservers : MonoBehaviour
     [SerializeField] private PointDetector pointDetector;
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private SpriteRenderer spriteRenderer;
-    public TextMeshProUGUI waitForTimeIndicator;
+    [HideInInspector] public TextMeshProUGUI waitForTimeIndicator;
 
     [Inject] private FinishLine finishLine;
     private bool gotIn = false;

@@ -8,8 +8,6 @@ namespace PlaneSection
 {
     public sealed class PlaneController : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI speedIndicator;
-
         private Plane plane;
         private PlaneControl planeControl;
         private const float lowSpeed = 100;
@@ -36,7 +34,6 @@ namespace PlaneSection
             {
                 yield return new WaitForSeconds(1f);
                 UpdateStateBasedOnSpeed();
-                speedIndicator.text = $"Speed\n   {(int)plane.currentSpeed}";
             }
         }
 
