@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Diagnostics.SymbolStore;
-using TMPro;
 using UnityEngine;
 using Zenject;
 
@@ -41,13 +39,13 @@ namespace PlaneSection
         {
             if (plane.currentSpeed < lowSpeed)
             {
-                planeControl.pitchAmount = PlaneData.pitchGroundAmount;
-                planeControl.rollAmount = 0;
+                /*planeControl.pitchAmount = PlaneData.pitchGroundAmount;
+                planeControl.rollAmount = 0;*/
             }
             else
             {
-                planeControl.pitchAmount = PlaneData.pitchAmount;
-                planeControl.rollAmount = PlaneData.rollAmount;
+                /*planeControl.pitchAmount = PlaneData.pitchAmount;
+                planeControl.rollAmount = PlaneData.rollAmount;*/
             }
         }
     }

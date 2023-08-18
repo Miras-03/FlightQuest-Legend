@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cac2217240c70a04385a3b47c4db0831, type: 3}
+  m_Name: PlaneV3
+  m_EditorClassIdentifier: 
+  planeModel: {fileID: 6783042612740966625, guid: 7a4952846ba09894b99aeabfdafb8ec0, type: 3}
+  price: 890
+  uniqueCode: 1
+  speed: 990
+  acceleration: 100
+  handling: 7
+  yawAmount: 50
+  pitchAmount: 40
+  pitchGroundAmount: 50
+  rollAmount: 90
+  rotationSmoothSpeed: 1.4

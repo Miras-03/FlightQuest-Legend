@@ -1,15 +1,26 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "LightPlane", menuName = "DataContainer/PlaneData/LightPlane")]
+[CreateAssetMenu(fileName = "PlaneData", menuName = "ScriptableObject/PlaneData")]
 public sealed class PlaneData : ScriptableObject
 {
-    public const float smoothAirSpeed = 1.4f;
-    public const float smoothLandSpeed = 0.9f;
+    public GameObject planeModel;
 
-    public const float yawAmount = 50f;
-    public const float pitchAmount = 50f;
-    public const float pitchGroundAmount = 20f;
-    public const float rollAmount = 90f;
+    [Header("PlaneDescription")]
+    public int price;
+    public int uniqueCode;
 
-    public const float rotationSmoothSpeed = 1.4f;
+    [Space(20)]
+    [Header("PlaneStats")]
+    public int speed;
+    public int acceleration;
+    public int handling;
+
+    [Space(20)]
+    [Header("PlaneSetting")]
+    public float yawAmount;
+    public float pitchAmount;
+    public float pitchGroundAmount;
+    public float rollAmount;
+
+    public float rotationSmoothSpeed;
 }

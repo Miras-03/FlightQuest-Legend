@@ -7,8 +7,8 @@ namespace CameraOption
     {
         [SerializeField] private Transform target;
 
-        public Vector3 locationOffset = new Vector3(238.6f, 100f, 0);
-        public Vector3 rotationOffset = new Vector3(14f, -89.988f, 0);
+        private Vector3 locationOffset = new Vector3(238.6f, 100f, 0);
+        private Vector3 rotationOffset = new Vector3(14f, -89.988f, 0);
 
         [HideInInspector] private float upCoordOfCamera = 100f;
         [HideInInspector] private float upRotationOfCamera = 14f;

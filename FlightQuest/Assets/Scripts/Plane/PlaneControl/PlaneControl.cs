@@ -13,11 +13,11 @@ namespace PlaneSection
         private float pitch;
         private float roll;
 
-        private const float yawAmount = PlaneData.yawAmount;
-        [HideInInspector] public float pitchAmount = PlaneData.pitchAmount;
-        [HideInInspector] public float rollAmount = PlaneData.rollAmount;
+        private float yawAmount;
+        [HideInInspector] public float pitchAmount;
+        [HideInInspector] public float rollAmount;
 
-        private const float rotationSmoothSpeed = PlaneData.rotationSmoothSpeed;
+        private float rotationSmoothSpeed;
 
         private float currentYawVelocity;
         private float currentPitchVelocity;

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cac2217240c70a04385a3b47c4db0831, type: 3}
+  m_Name: LightPlane
+  m_EditorClassIdentifier: 
+  planeModel: {fileID: 2132970168135295506, guid: fa28e0cc64b3f4345a9d2215c5bfec80, type: 3}
+  price: 0
+  speed: 350
+  acceleration: 50
+  handling: 7
+  yawAmount: 50
+  pitchAmount: 50
+  pitchGroundAmount: 20
+  rollAmount: 70
+  rotationSmoothSpeed: 1.4
