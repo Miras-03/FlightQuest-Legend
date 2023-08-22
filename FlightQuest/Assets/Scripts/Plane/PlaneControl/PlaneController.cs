@@ -1,23 +1,36 @@
 using System.Collections;
 using UnityEngine;
-using Zenject;
 
 namespace PlaneSection
 {
     public sealed class PlaneController : MonoBehaviour
     {
-        private Plane plane;
+        private AirPlane plane;
         private PlaneControl planeControl;
+
+        private PlaneData planeData;
+
+        private int pitchAmount;
+        private int groundPitchAmount;
+        private int rollAmount;
+
         private const float lowSpeed = 100;
 
-        [Inject]
-        public void Contruct(Plane plane)
+        private void Awake()
         {
-            this.plane = plane;
+            plane = GetComponent<AirPlane>();
             planeControl = GetComponent<PlaneControl>();
         }
 
-        private void Start() => StartCoroutine(UpdateEverySeconds());
+        private void Start()
+        {
+            planeControl.yawAmount = 50;//planeData.yawAmount;
+            pitchAmount = 50;//planeData.pitchAmount;
+            groundPitchAmount = 50;//planeData.groundPitchAmount; 
+            rollAmount = 50;
+
+            StartCoroutine(UpdateEverySeconds());
+        }
 
         private void FixedUpdate()
         {
@@ -39,13 +52,13 @@ namespace PlaneSection
         {
             if (plane.currentSpeed < lowSpeed)
             {
-                /*planeControl.pitchAmount = PlaneData.pitchGroundAmount;
-                planeControl.rollAmount = 0;*/
+                planeControl.pitchAmount = groundPitchAmount;
+                planeControl.rollAmount = 0;
             }
             else
             {
-                /*planeControl.pitchAmount = PlaneData.pitchAmount;
-                planeControl.rollAmount = PlaneData.rollAmount;*/
+                planeControl.pitchAmount = pitchAmount;
+                planeControl.rollAmount = rollAmount;
             }
         }
     }

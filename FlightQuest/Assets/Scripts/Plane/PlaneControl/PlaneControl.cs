@@ -3,17 +3,17 @@ using Zenject;
 
 namespace PlaneSection
 {
-    public class PlaneControl : MonoBehaviour
+    public sealed class PlaneControl : MonoBehaviour
     {
-        [SerializeField] private FixedJoystick joystick;
+        private FixedJoystick joystick;
 
-        private Plane plane;
+        private AirPlane plane;
 
         private float yaw;
         private float pitch;
         private float roll;
 
-        private float yawAmount;
+        [HideInInspector] public float yawAmount;
         [HideInInspector] public float pitchAmount;
         [HideInInspector] public float rollAmount;
 
@@ -27,7 +27,15 @@ namespace PlaneSection
         private float verticalInput;
 
         [Inject]
-        public void Construct(Plane plane) => this.plane = plane;
+        public void Constuct(FixedJoystick joystick)
+        {
+            this.joystick = joystick;
+        }
+
+        private void Awake()
+        {
+            plane = GetComponent<AirPlane>();
+        }
 
         public void Control()
         {

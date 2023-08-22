@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlaneDisplay : MonoBehaviour
+public sealed class PlaneDisplay : MonoBehaviour
 {
     [Header("PlaneDescription")]
     [SerializeField] private TextMeshProUGUI price;

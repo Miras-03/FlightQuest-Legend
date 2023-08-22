@@ -7,18 +7,16 @@ namespace PlaneSection
 {
     public sealed class PointDetector : MonoBehaviour
     {
-        [SerializeField] private Slider lever;
+        private Slider lever;
         [SerializeField] private ParticleSystem selectionEffect;
 
-        [SerializeField] private ExecuteFinishObservers executeFinishObserver;
-        [SerializeField] private PetrolLevel petrolLevel;
-
-        private Plane plane;
-        private PlaneLevelAcceleration accelerationLevel;
+        private PetrolLevel petrolLevel;
+        private AirPlane plane;
+        private PropellerRotate propellerRotate;
 
         private Coroutine petrolCoroutine;
 
-        [SerializeField] private float petrolLitres;
+        private float petrolLitres;
 
         private const int startingPetrolLitres = 100;
         private const float perLiter = 0.01f;
@@ -27,10 +25,13 @@ namespace PlaneSection
         private bool isFailed = false;
 
         [Inject]
-        public void Construct(Plane plane, PlaneLevelAcceleration accelerationLevel)
+        public void Construct(PetrolLevel petrolLevel, Slider lever, PropellerRotate propellerRotate)
         {
-            this.plane = plane;
-            this.accelerationLevel = accelerationLevel;
+            this.petrolLevel = petrolLevel;
+            this.lever = lever;
+            this.propellerRotate = propellerRotate;
+
+            plane = GetComponent<AirPlane>();
         }
 
         private void Start()
@@ -77,6 +78,8 @@ namespace PlaneSection
                     StopCoroutine(petrolCoroutine);
                 petrolCoroutine = StartCoroutine(OffLitresTimer());
             }
+            else if (other.CompareTag("Finish"))
+                Destroy(this);
         }
 
         private void SetMaxValueForPetrol()
@@ -94,9 +97,7 @@ namespace PlaneSection
         private void SetDefaultSpeed()
         {
             plane.maxSpeed = 0;
-            accelerationLevel.AccelerationLevel = 0;
+            propellerRotate.GetAccelerationLevel(0);
         }
-
-        public void BreakDown() => Destroy(this);
     }
 }

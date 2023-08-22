@@ -1,23 +1,28 @@
+using PlaneSection;
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 namespace CameraOption
 {
     public sealed class CameraManager : MonoBehaviour
     {
-        [SerializeField] private Transform target;
+        private Transform target;
 
         private Vector3 locationOffset = new Vector3(238.6f, 100f, 0);
         private Vector3 rotationOffset = new Vector3(14f, -89.988f, 0);
 
         [HideInInspector] private float upCoordOfCamera = 100f;
         [HideInInspector] private float upRotationOfCamera = 14f;
+
         [HideInInspector] private float downCoordOfCamera = 50f;
         [HideInInspector] private float downRotationOfCamera = 3.3f;
 
         private const float smoothSpeed = 0.125f;
 
         private bool isUpCoord = false;
+
+        public void OnPlaneInstanceReady(GameObject planeInstance) => target = planeInstance.transform;
 
         private void FixedUpdate()
         {

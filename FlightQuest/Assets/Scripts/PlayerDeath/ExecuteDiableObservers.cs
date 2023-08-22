@@ -4,8 +4,6 @@ using Zenject;
 
 public sealed class ExecuteDiableObservers : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem smoke;
-
     private PlayerDeath playerDeath;
 
     [Inject]

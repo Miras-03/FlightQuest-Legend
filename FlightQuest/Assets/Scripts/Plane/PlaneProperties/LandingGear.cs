@@ -1,20 +1,22 @@
 using Zenject;
 using UnityEngine;
 using UnityEngine.UI;
+using PlaneSection;
 
 public class LandingGear : MonoBehaviour
 {
-    private Plane plane;
+    private AirPlane plane;
     private Animator anim;
 
-    [SerializeField] private Slider lever;
+    private Slider lever;
 
     private float forceSpeed = 100f;
 
     [Inject]
-    public void Contruct(Plane plane)
+    public void Construct(Slider lever)
     {
-        this.plane = plane;
+        this.lever = lever;
+        plane = GetComponent<AirPlane>();
         anim = gameObject.GetComponentInChildren<Animator>();
     }
 

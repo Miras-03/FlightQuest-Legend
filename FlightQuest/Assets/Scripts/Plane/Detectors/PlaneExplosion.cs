@@ -1,18 +1,17 @@
 using UnityEngine;
 using System.Collections;
-using Zenject;
+using System;
 
 namespace PlaneSection
 {
     public sealed class PlaneExplosion : MonoBehaviour, IDieable
     {
-        private Plane plane;
+        private AirPlane plane;
         [SerializeField] private GameObject[] planeBodies;
 
         private const int lowSpeed = 10;
 
-        [Inject]
-        public void Construct(Plane plane) => this.plane = plane;
+        private void Awake() => plane = GetComponent<AirPlane>();
 
         public void ExecuteExplode()
         {

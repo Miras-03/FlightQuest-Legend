@@ -1,18 +1,17 @@
 using PlaneSection;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Zenject;
 
 public sealed class ExecuteFinishObservers : MonoBehaviour
 {
-    [SerializeField] private PointDetector pointDetector;
+    private FinishLine finishLine;
+
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [HideInInspector] public TextMeshProUGUI waitForTimeIndicator;
 
-    [Inject] private FinishLine finishLine;
     private bool gotIn = false;
     [HideInInspector] public bool isReachedLosePoint = false;
     [HideInInspector] public bool isReachedFinishPoint = false;
@@ -24,10 +23,8 @@ public sealed class ExecuteFinishObservers : MonoBehaviour
     [Inject]
     public void Constuctor(FinishLine finishLine) => this.finishLine = finishLine;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter()
     {
-        pointDetector.BreakDown();
-        
         if (!gotIn)
         {
             DestroyFinishLine();

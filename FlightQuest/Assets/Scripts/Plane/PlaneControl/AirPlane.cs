@@ -2,11 +2,24 @@ using UnityEngine;
 
 namespace PlaneSection
 {
-    public class LightPlane : Plane
+    public class AirPlane : MonoBehaviour
     {
+        [HideInInspector] public float maxPossibleSpeed;
+
+        public float maxSpeed;
+        public float currentSpeed = 0f;
+
+        [HideInInspector] public int speedAcceleration;
+        [HideInInspector] public int decelerationFactor;
+
+        [HideInInspector] public bool isLandingGearRemoved = true;
+        [HideInInspector] public bool isBurned = false;
+
+        [HideInInspector] public Rigidbody rb;
+
         private void Awake() => rb = GetComponent<Rigidbody>();
 
-        public override void Move()
+        public void Move()
         {
             if (currentSpeed > maxSpeed)
                 currentSpeed = Mathf.MoveTowards(currentSpeed, maxSpeed, decelerationFactor * Time.deltaTime);

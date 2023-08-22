@@ -2,7 +2,7 @@ using CameraOption;
 using PlaneSection;
 using UnityEngine;
 
-public class LandingGearManager : MonoBehaviour
+public sealed class LandingGearManager : MonoBehaviour
 {
     [SerializeField] private CameraManager cameraManager;
     [SerializeField] private PointDetector pointDetector;

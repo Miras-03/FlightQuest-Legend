@@ -4,17 +4,12 @@ using Zenject;
 
 public sealed class AccelerationManager : MonoBehaviour
 {
-    private PlaneLevelAcceleration accelerationLevel;
+    private PropellerRotate propellerRotate;
 
-    [Header("AccelerationObservers")]
-    [SerializeField] private PropellerRotate propellerRotate;
+    private bool injected;
 
-    [Inject]
-    public void Construct(PlaneLevelAcceleration accelerationLevel)
-    {
-        this.accelerationLevel = accelerationLevel;
-        this.accelerationLevel.AddOvserver(propellerRotate);
-    }
+    //[Inject]
+    //public void Construct(PlaneLevelAcceleration accelerationLevel) => this.accelerationLevel = accelerationLevel;
 
-    private void OnDisable() => accelerationLevel.RemoveObserver();
+    
 }

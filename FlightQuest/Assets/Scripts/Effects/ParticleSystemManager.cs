@@ -1,10 +1,14 @@
 using UnityEngine;
+using Zenject;
 
 public class ParticleSystemManager : MonoBehaviour, IFinishable, IDieable
 {
-    [SerializeField] private ParticleSystem[] effects;
+    private ParticleSystem explosionEffect;
+    [SerializeField] private ParticleSystem confettiEffect;
 
-    public void ExecuteExplode() => effects[1].Play();
-    public void ExecuteFinish() => effects[0].Play();
+    [Inject]
+    public void Construction(ParticleSystem explosionEffect) => this.explosionEffect = explosionEffect;
 
+    public void ExecuteExplode() => confettiEffect.Play();
+    public void ExecuteFinish() => explosionEffect.Play();
 }

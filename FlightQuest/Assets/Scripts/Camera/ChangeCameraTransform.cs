@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class ChangeCameraTransform : MonoBehaviour
+public sealed class ChangeCameraTransform : MonoBehaviour
 {
     private Vector3 downCameraPosition = new Vector3(0f, 62f, -142f);
     private Vector3 downCameraRotation = new Vector3(9f, 0f, 0f);

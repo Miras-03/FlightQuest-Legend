@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PetrolLevel : MonoBehaviour
+public sealed class PetrolLevel : MonoBehaviour
 {
     private Slider petrolLevel;
     private Image fillImage;

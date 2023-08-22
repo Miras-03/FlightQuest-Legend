@@ -2,30 +2,35 @@ using CameraOption;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
+using System;
 
 namespace PlaneSection
 {
     public sealed class SpeedManager : MonoBehaviour, IDieable, IFinishable
     {
-        [SerializeField] private Slider speedLever;
-        [SerializeField] private GameObject[] objectsOfUI;
+        private Slider speedLever;
+        private UIManager managerOfUI;
 
-        private Plane plane;
-        private PlaneLevelAcceleration accelerationLevel;
+        private AirPlane plane;
+        private PropellerRotate propellerRotate;
         private PointDetector pointDetector;
-        [SerializeField] private CameraManager cameraManager;
+        private CameraManager cameraManager;
 
         private bool isCameraEnabled = false;
 
         [Inject]
-        public void Contruct(Plane plane, PlaneLevelAcceleration accelerationLevel)
+        public void Contruct(UIManager managerOfUI, CameraManager cameraManager, Slider speedLever, PropellerRotate propellerRotate)
         {
-            this.plane = plane;
-            this.accelerationLevel = accelerationLevel;
+            this.propellerRotate = propellerRotate;
+            this.managerOfUI = managerOfUI;
 
+            this.cameraManager = cameraManager;
+            this.speedLever = speedLever;
+
+            plane = GetComponent<AirPlane>();
             pointDetector = GetComponent<PointDetector>();
 
-            speedLever.onValueChanged.AddListener(SetAcceleration);
+            this.speedLever.onValueChanged.AddListener(SetAcceleration);
         }
 
         private void Start()
@@ -49,7 +54,7 @@ namespace PlaneSection
 
             plane.maxSpeed = newSpeed;
 
-            accelerationLevel.AccelerationLevel = Mathf.Sqrt(newSpeed);
+            propellerRotate.GetAccelerationLevel(newSpeed);
         }
 
         private void TurnPointDetectorOn() => pointDetector.enabled = true;
@@ -60,15 +65,10 @@ namespace PlaneSection
             cameraManager.enabled = isCameraEnabled;
         }
 
-        private void SetUIObjects()
-        {
-            objectsOfUI[0].SetActive(false);
-            objectsOfUI[1].SetActive(true);
-        }
+        private void SetUIObjects() => managerOfUI.SetUIObjects();
 
         private void SlowDown(float theSpeed)
         {
-            accelerationLevel.AccelerationLevel = 5;
             plane.maxSpeed = theSpeed;
         }
 

@@ -17,10 +17,10 @@ public sealed class PlaneData : ScriptableObject
 
     [Space(20)]
     [Header("PlaneSetting")]
-    public float yawAmount;
-    public float pitchAmount;
-    public float pitchGroundAmount;
-    public float rollAmount;
+    public int yawAmount;
+    public int pitchAmount;
+    public int groundPitchAmount;
+    public int rollAmount;
 
     public float rotationSmoothSpeed;
 }

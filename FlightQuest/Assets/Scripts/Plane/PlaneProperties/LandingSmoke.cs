@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LandingSmoke : MonoBehaviour
+public sealed class LandingSmoke : MonoBehaviour
 {
     [SerializeField] private ParticleSystem smoke;
 

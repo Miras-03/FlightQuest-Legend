@@ -4,22 +4,31 @@ using Zenject;
 
 public sealed class DeathManager : MonoBehaviour
 {
-    private PlayerDeath playerDeath;
-
     [Header("DeathObservers")]
-    [SerializeField] private PlaneExplosion planeExplosion;
-    [SerializeField] private ParticleSystemManager particleSystemManager;
-    [SerializeField] private SpeedManager speedManager;
+    private ParticleSystemManager particleSystemManager;
+    private PlayerDeath playerDeath;
+    private SpeedManager speedManager;
+    private PlaneExplosion planeExplosion;
+
+    private bool injected = false;
 
     [Inject]
-    public void Constructor(PlayerDeath playerDeath)
-    {
-        this.playerDeath = playerDeath;
+    public void Initialize(PrefabInitializationNotifier notifier) => 
+        notifier.OnPrefabInitialized += InjectAfterDelay;
 
-        playerDeath.AddObservers(planeExplosion);
-        playerDeath.AddObservers(speedManager);
-        playerDeath.AddObservers(particleSystemManager);
+    private void InjectAfterDelay()
+    {
+        if (!injected)
+        {
+            injected = true;
+            playerDeath.AddObservers(speedManager);
+            playerDeath.AddObservers(planeExplosion);
+            playerDeath.AddObservers(particleSystemManager);
+        }
     }
+
+    [Inject]
+    public void Constructor(PlayerDeath playerDeath) => this.playerDeath = playerDeath;
 
     private void OnDisable() => playerDeath.RemoveObservers();
 }
