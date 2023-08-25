@@ -5,7 +5,7 @@ using Zenject;
 
 namespace PlaneSection
 {
-    public sealed class PointDetector : MonoBehaviour
+    public sealed class PointDetector : MonoBehaviour, ILandable
     {
         private Slider lever;
         [SerializeField] private ParticleSystem selectionEffect;
@@ -23,6 +23,7 @@ namespace PlaneSection
         private const int lowPetrolLevel = 0;
 
         private bool isFailed = false;
+        private bool hasEntered = false;
 
         [Inject]
         public void Construct(PetrolLevel petrolLevel, Slider lever, PropellerRotate propellerRotate)
@@ -79,7 +80,7 @@ namespace PlaneSection
                 petrolCoroutine = StartCoroutine(OffLitresTimer());
             }
             else if (other.CompareTag("Finish"))
-                Destroy(this);
+                ExecuteLand();
         }
 
         private void SetMaxValueForPetrol()
@@ -98,6 +99,13 @@ namespace PlaneSection
         {
             plane.maxSpeed = 0;
             propellerRotate.GetAccelerationLevel(0);
+        }
+
+        public void ExecuteLand()
+        {
+            if (hasEntered)
+                Destroy(this);
+            hasEntered = !hasEntered;
         }
     }
 }

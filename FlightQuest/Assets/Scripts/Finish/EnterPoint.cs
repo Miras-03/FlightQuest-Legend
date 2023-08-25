@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnterPoint : MonoBehaviour
+public sealed class EnterPoint : MonoBehaviour
 {
     private ExecuteFinishObservers executeFinishObserver;
 

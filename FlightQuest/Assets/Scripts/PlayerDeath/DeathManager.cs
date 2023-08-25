@@ -4,9 +4,8 @@ using Zenject;
 
 public sealed class DeathManager : MonoBehaviour
 {
-    [Header("DeathObservers")]
-    private ParticleSystemManager particleSystemManager;
     private PlayerDeath playerDeath;
+
     private SpeedManager speedManager;
     private PlaneExplosion planeExplosion;
 
@@ -21,9 +20,12 @@ public sealed class DeathManager : MonoBehaviour
         if (!injected)
         {
             injected = true;
+
+            speedManager = FindObjectOfType<SpeedManager>();
+            planeExplosion = FindObjectOfType<PlaneExplosion>();
+
             playerDeath.AddObservers(speedManager);
             playerDeath.AddObservers(planeExplosion);
-            playerDeath.AddObservers(particleSystemManager);
         }
     }
 

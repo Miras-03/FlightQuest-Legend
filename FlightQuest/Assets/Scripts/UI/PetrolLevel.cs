@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public sealed class PetrolLevel : MonoBehaviour
 {
     private Slider petrolLevel;
-    private Image fillImage;
+    [SerializeField] private Image fillImage;
 
     private Animator animator;
 
@@ -14,9 +14,8 @@ public sealed class PetrolLevel : MonoBehaviour
 
     private void Awake()
     {
-        petrolLevel = GetComponent<Slider>();
-        fillImage = petrolLevel.fillRect.GetComponent<Image>();
         animator = GetComponent<Animator>();
+        petrolLevel = GetComponent<Slider>();
     }
 
     public int SetMaxLevel

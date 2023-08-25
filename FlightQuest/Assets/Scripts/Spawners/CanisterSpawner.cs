@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CanisterSpawner : MonoBehaviour
+public sealed class CanisterSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject prefabToSpawn;
     private const int numberOfPrefabsToSpawn = 10;

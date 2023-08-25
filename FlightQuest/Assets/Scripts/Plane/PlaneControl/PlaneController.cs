@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 namespace PlaneSection
 {
@@ -8,11 +9,9 @@ namespace PlaneSection
         private AirPlane plane;
         private PlaneControl planeControl;
 
-        private PlaneData planeData;
-
-        private int pitchAmount;
-        private int groundPitchAmount;
-        private int rollAmount;
+        [HideInInspector] public int pitchAmount;
+        [HideInInspector] public int groundPitchAmount;
+        [HideInInspector] public int rollAmount;
 
         private const float lowSpeed = 100;
 
@@ -22,15 +21,7 @@ namespace PlaneSection
             planeControl = GetComponent<PlaneControl>();
         }
 
-        private void Start()
-        {
-            planeControl.yawAmount = 50;//planeData.yawAmount;
-            pitchAmount = 50;//planeData.pitchAmount;
-            groundPitchAmount = 50;//planeData.groundPitchAmount; 
-            rollAmount = 50;
-
-            StartCoroutine(UpdateEverySeconds());
-        }
+        private void Start() => StartCoroutine(UpdateEverySeconds());
 
         private void FixedUpdate()
         {

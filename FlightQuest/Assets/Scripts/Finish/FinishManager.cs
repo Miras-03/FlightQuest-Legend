@@ -24,6 +24,11 @@ public sealed class FinishManager : MonoBehaviour
         {
             injected = true;
 
+            particleSystemManager = FindObjectOfType<ParticleSystemManager>();
+            managerUI = FindObjectOfType<UIManager>();
+            speedManager = FindObjectOfType<SpeedManager>();
+            levelManager = FindObjectOfType<LevelManager>();
+
             finishLine.AddObservers(particleSystemManager);
             finishLine.AddObservers(managerUI);
             finishLine.AddObservers(speedManager);

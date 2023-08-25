@@ -2,7 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour, IFinishable, IDieable
+public sealed class UIManager : MonoBehaviour, IFinishable, IDieable
 {
     [SerializeField] private LevelManager levelManager;
 
@@ -14,17 +14,20 @@ public class UIManager : MonoBehaviour, IFinishable, IDieable
     [Header("UIObjects")]
     [SerializeField] private GameObject finishPanel;
     [SerializeField] private GameObject[] objectsOfUI;
-    [SerializeField] private GameObject[] objectsOfStartUI;
 
-    private void Start() => levelIndicator.text = $"Level {levelManager.GetCurrentLevel}";
+    private void Start()
+    {
+        TurnOnButtons();
+        levelIndicator.text = $"Level {levelManager.GetCurrentLevel}";
+    }
 
     public void ExecuteFinish()
     {
-        DestroyButtons();
+        TurnOffButtons();
         StartCoroutine(EnableUIPanel());
     }
 
-    public void ExecuteExplode() => DestroyButtons();
+    public void ExecuteExplode() => TurnOffButtons();
 
     private IEnumerator EnableUIPanel()
     {
@@ -32,15 +35,15 @@ public class UIManager : MonoBehaviour, IFinishable, IDieable
         finishPanel.SetActive(true);
     }
 
-    private void DestroyButtons()
+    private void TurnOffButtons()
     {
-        foreach (GameObject button in objectsOfUI)
-            Destroy(button);
-    }   
+        foreach (GameObject obj in objectsOfUI)
+            obj.SetActive(false);
+    }
 
-    public void SetUIObjects()
+    private void TurnOnButtons()
     {
-        objectsOfStartUI[0].SetActive(false);
-        objectsOfStartUI[1].SetActive(true);
+        foreach (GameObject obj in objectsOfUI)
+            obj.SetActive(true);
     }
 }

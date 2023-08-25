@@ -17,7 +17,7 @@ namespace PlaneSection
         [HideInInspector] public float pitchAmount;
         [HideInInspector] public float rollAmount;
 
-        private float rotationSmoothSpeed;
+        [HideInInspector] public int rotationSmoothSpeed;
 
         private float currentYawVelocity;
         private float currentPitchVelocity;
@@ -27,15 +27,9 @@ namespace PlaneSection
         private float verticalInput;
 
         [Inject]
-        public void Constuct(FixedJoystick joystick)
-        {
-            this.joystick = joystick;
-        }
+        public void Constuct(FixedJoystick joystick) => this.joystick = joystick;
 
-        private void Awake()
-        {
-            plane = GetComponent<AirPlane>();
-        }
+        private void Awake() => plane = GetComponent<AirPlane>();
 
         public void Control()
         {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ShipSpawner : MonoBehaviour
+public sealed class ShipSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject prefabToSpawn;
     private const int numberOfPrefabsToSpawn = 5;

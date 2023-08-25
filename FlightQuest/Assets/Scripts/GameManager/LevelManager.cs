@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour, IFinishable
+public sealed class LevelManager : MonoBehaviour, IFinishable
 {
     private int currentLevel;
     public int GetCurrentLevel { get => currentLevel; }

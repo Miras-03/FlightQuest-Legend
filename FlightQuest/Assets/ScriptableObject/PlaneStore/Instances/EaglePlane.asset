@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cac2217240c70a04385a3b47c4db0831, type: 3}
   m_Name: EaglePlane
   m_EditorClassIdentifier: 
-  planeModel: {fileID: 5588413167485372887, guid: f8c3b65648d88284e8a74f107c8cbb56, type: 3}
+  planeModel: {fileID: 6231843761764582766, guid: 6de6b6e9d03474e49b66c4614227fb84, type: 3}
   price: 13700
+  uniqueCode: 0
   speed: 450
   acceleration: 70
+  deceleration: 0
   handling: 9
   yawAmount: 60
   pitchAmount: 60
-  pitchGroundAmount: 30
+  groundPitchAmount: 0
   rollAmount: 80
-  rotationSmoothSpeed: 1.4
+  rotationSmoothSpeed: 1

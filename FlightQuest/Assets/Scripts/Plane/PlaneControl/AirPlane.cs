@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace PlaneSection
 {
-    public class AirPlane : MonoBehaviour
+    public sealed class AirPlane : MonoBehaviour
     {
         [HideInInspector] public float maxPossibleSpeed;
 

@@ -1,8 +1,7 @@
 using PlaneSection;
-using UnityEngine;
 using Zenject;
 
-public class PlaneScriptsInstaller : MonoInstaller
+public sealed class PlaneScriptsInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
@@ -10,8 +9,5 @@ public class PlaneScriptsInstaller : MonoInstaller
         Container.Bind<PlaneExplosion>().FromComponentInHierarchy().AsSingle();
         Container.Bind<PropellerRotate>().FromComponentInHierarchy().AsSingle();
         Container.Bind<PointDetector>().FromComponentInHierarchy().AsSingle();
-        Container.Bind<LandingGear>().FromComponentInHierarchy().AsSingle();
-
-        Container.Bind<ParticleSystem>().FromComponentInHierarchy().AsSingle();
     }
 }

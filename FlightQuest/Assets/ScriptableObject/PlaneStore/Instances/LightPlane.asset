@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cac2217240c70a04385a3b47c4db0831, type: 3}
   m_Name: LightPlane
   m_EditorClassIdentifier: 
-  planeModel: {fileID: 3317191407271600085, guid: 8e9f623fa60e0f348a9b9846d125e845, type: 3}
+  planeModel: {fileID: 2928791022217692888, guid: 8e9f623fa60e0f348a9b9846d125e845, type: 3}
   price: 0
   uniqueCode: 0
   speed: 350
   acceleration: 50
+  deceleration: 30
   handling: 7
-  yawAmount: 0
-  pitchAmount: 0
+  yawAmount: 50
+  pitchAmount: 50
   groundPitchAmount: 0
-  rollAmount: 0
-  rotationSmoothSpeed: 1.4
+  rollAmount: 70
+  rotationSmoothSpeed: 1

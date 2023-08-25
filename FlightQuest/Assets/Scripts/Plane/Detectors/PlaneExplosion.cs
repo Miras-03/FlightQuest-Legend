@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using System;
 
 namespace PlaneSection
 {
@@ -8,6 +7,7 @@ namespace PlaneSection
     {
         private AirPlane plane;
         [SerializeField] private GameObject[] planeBodies;
+        [SerializeField] private ParticleSystem explosionEffect;
 
         private const int lowSpeed = 10;
 
@@ -22,9 +22,15 @@ namespace PlaneSection
         private void Explode()
         {
             plane.isBurned = true;
+            explosionEffect.Play();
+            SwapBodies();
+            plane.maxSpeed = lowSpeed;
+        }
+
+        private void SwapBodies()
+        {
             planeBodies[1].SetActive(true);
             planeBodies[0].SetActive(false);
-            plane.maxSpeed = lowSpeed;
         }
 
         private IEnumerator RestartAfterDelay()

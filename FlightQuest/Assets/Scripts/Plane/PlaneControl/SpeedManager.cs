@@ -1,31 +1,36 @@
 using CameraOption;
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
-using System;
 
 namespace PlaneSection
 {
     public sealed class SpeedManager : MonoBehaviour, IDieable, IFinishable
     {
+        public static event Action OnShiftUIElements;
+
         private Slider speedLever;
-        private UIManager managerOfUI;
 
         private AirPlane plane;
         private PropellerRotate propellerRotate;
         private PointDetector pointDetector;
         private CameraManager cameraManager;
+        private UIAnimationManager managerOfUIAnimation;
 
         private bool isCameraEnabled = false;
 
         [Inject]
-        public void Contruct(UIManager managerOfUI, CameraManager cameraManager, Slider speedLever, PropellerRotate propellerRotate)
+        public void Contruct(CameraManager cameraManager, Slider speedLever, PropellerRotate propellerRotate, 
+            UIAnimationManager managerOfUIAnimation)
         {
             this.propellerRotate = propellerRotate;
-            this.managerOfUI = managerOfUI;
-
             this.cameraManager = cameraManager;
             this.speedLever = speedLever;
+            this.managerOfUIAnimation = managerOfUIAnimation;
+
+            this.managerOfUIAnimation.OnUIElementsTurnedOn += TurnPointDetectorOn;
 
             plane = GetComponent<AirPlane>();
             pointDetector = GetComponent<PointDetector>();
@@ -35,10 +40,6 @@ namespace PlaneSection
 
         private void Start()
         {
-            plane.maxPossibleSpeed = 250;
-            plane.speedAcceleration = 30;
-            plane.decelerationFactor = 30;
-
             speedLever.minValue = 0;
             speedLever.maxValue = plane.maxPossibleSpeed;
         }
@@ -47,9 +48,8 @@ namespace PlaneSection
         {
             if (!isCameraEnabled)
             {
-                SetUIObjects();
                 SetCamera();
-                TurnPointDetectorOn();
+                StartCoroutine(WaitForDelay());
             }
 
             plane.maxSpeed = newSpeed;
@@ -65,15 +65,22 @@ namespace PlaneSection
             cameraManager.enabled = isCameraEnabled;
         }
 
-        private void SetUIObjects() => managerOfUI.SetUIObjects();
-
         private void SlowDown(float theSpeed)
         {
             plane.maxSpeed = theSpeed;
+
+            plane.rb.drag = 0;
+            plane.rb.angularDrag = 0;
         }
 
         public void ExecuteExplode() => SlowDown(10);
 
         public void ExecuteFinish() => SlowDown(0);
+
+        private IEnumerator WaitForDelay()
+        {
+            yield return new WaitForSeconds(1f);
+            OnShiftUIElements?.Invoke();
+        }
     }
 }
