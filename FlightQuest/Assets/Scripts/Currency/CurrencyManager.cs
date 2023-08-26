@@ -1,15 +1,15 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using Zenject;
 
-public class CurrencyManager : MonoBehaviour
+public sealed class CurrencyManager : MonoBehaviour
 {
     private Currency currency;
 
     [SerializeField] private TextMeshProUGUI showText;
 
-    private int ordinaryCurrency = 3400;
-    private int doubleCurrency = 10200;
+    private float smoothChangeDuration = 1.0f;
 
     [Inject]
     public void Constructor(Currency currency) => this.currency = currency;
@@ -18,6 +18,31 @@ public class CurrencyManager : MonoBehaviour
 
     public void ShowCurrencyText() => currency.ShowCurrencyCount(showText);
 
-    public void GetCurrency() => currency.TakeCurrency += ordinaryCurrency;
-    public void GetDoubleCurrency() => currency.TakeCurrency += doubleCurrency;
+    public int GetCurrency { get => currency.TakeCurrency; }
+
+    public void TakeCurrency(int amount)
+    {
+        int initialCurrency = currency.TakeCurrency;
+
+        StartCoroutine(SmoothChangeCurrency(initialCurrency, initialCurrency + amount));
+
+        currency.TakeCurrency += amount;
+    }
+
+    private IEnumerator SmoothChangeCurrency(int startValue, int endValue)
+    {
+        float elapsedTime = 0;
+
+        while (elapsedTime < smoothChangeDuration)
+        {
+            float currentValue = Mathf.Lerp(startValue, endValue, elapsedTime / smoothChangeDuration);
+
+            showText.text = $"{Mathf.RoundToInt(currentValue)}$";
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        showText.text = $"{endValue}$";
+    }
 }

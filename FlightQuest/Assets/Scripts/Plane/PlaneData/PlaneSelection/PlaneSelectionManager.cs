@@ -33,24 +33,28 @@ public sealed class PlaneSelectionManager : MonoBehaviour
 
     private void LoadSelectedPlane()
     {
-        index = PlayerPrefs.GetInt(SelectedPlane, 0);
-        currentPlaneData = (PlaneData)planeData[index];
+        GetPlane();
 
         GameObject planeInstance = container.InstantiatePrefab(currentPlaneData.planeModel);
 
-        InjectAfterDelay();
+        SpaawnPlane();
 
         cameraManager.OnPlaneInstanceReady(planeInstance);
 
-        var notifier = GetComponent<PrefabInitializationNotifier>();
-        StartCoroutine(NotifyAfterDelay(notifier));
+        NotifyObservers();
     }
 
-    private void InjectAfterDelay()
+    private void GetPlane()
     {
+        index = PlayerPrefs.GetInt(SelectedPlane, 0);
+        currentPlaneData = (PlaneData)planeData[index];
+    }
+
+    private void SpaawnPlane()
+    {
+        plane = FindObjectOfType<AirPlane>();
         planeControl = FindObjectOfType<PlaneControl>();
         planeController = FindObjectOfType<PlaneController>();
-        plane = FindObjectOfType<AirPlane>();
 
         plane.maxPossibleSpeed = currentPlaneData.speed;
         plane.speedAcceleration = currentPlaneData.acceleration;
@@ -62,6 +66,12 @@ public sealed class PlaneSelectionManager : MonoBehaviour
         planeController.pitchAmount = currentPlaneData.pitchAmount;
         planeController.groundPitchAmount = currentPlaneData.groundPitchAmount;
         planeController.rollAmount = currentPlaneData.rollAmount;
+    }
+
+    private void NotifyObservers()
+    {
+        var notifier = GetComponent<PrefabInitializationNotifier>();
+        StartCoroutine(NotifyAfterDelay(notifier));
     }
 
     private IEnumerator NotifyAfterDelay(PrefabInitializationNotifier notifier)

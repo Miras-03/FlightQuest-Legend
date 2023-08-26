@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 public sealed class PlaneChanger : MonoBehaviour
@@ -20,6 +19,7 @@ public sealed class PlaneChanger : MonoBehaviour
     {
         currentIndex = PlayerPrefs.GetInt(SelectedPlane, 0);
         ChangePlaneData(currentIndex);
+        storeButton.UpdateButtonState();
     }
 
     public void ChangePlaneData(int change)
@@ -32,7 +32,7 @@ public sealed class PlaneChanger : MonoBehaviour
             currentIndex = 0;
 
         currentPlaneData = (PlaneData)planeData[currentIndex];
-        storeButton.UpdateButtonInteractable(currentPlaneData);
+        storeButton.UpdateButtonInteractable(currentPlaneData, currentIndex);
 
         planeDisplay?.DisplayPlane((PlaneData)planeData[currentIndex]);
     }

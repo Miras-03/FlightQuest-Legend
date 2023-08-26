@@ -1,6 +1,10 @@
 using Zenject;
 
-public class CurrencyInstaller : MonoInstaller
+public sealed class CurrencyInstaller : MonoInstaller
 {
-    public override void InstallBindings() => Container.Bind<Currency>().AsSingle();
+    public override void InstallBindings()
+    {
+        Container.Bind<Currency>().AsSingle();
+        Container.Bind<CurrencyManager>().FromComponentInHierarchy().AsSingle();
+    }
 }
