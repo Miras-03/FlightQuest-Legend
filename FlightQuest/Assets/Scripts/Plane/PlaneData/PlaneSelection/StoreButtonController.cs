@@ -9,15 +9,22 @@ public sealed class StoreButtonController : MonoBehaviour
 
     [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI currentState;
-    [SerializeField] private Button buyButton;
+    [SerializeField] private Button button;
+
+    private int selectedPlaneIndex;
 
     private const string _IsBought = nameof(_IsBought);
 
+    private const string SelectedPlane = nameof(SelectedPlane);
     private const string Get = nameof(Get);
     private const string Buy = nameof(Buy);
 
     [Inject]
-    public void Construct(CurrencyManager currencyManager) => this.currencyManager = currencyManager;
+    public void Construct(CurrencyManager currencyManager)
+    {
+        this.currencyManager = currencyManager;
+        selectedPlaneIndex = PlayerPrefs.GetInt(SelectedPlane, 0);
+    }
 
     public void BuyPlane(PlaneData currentPlaneData, int currentIndex)
     {
@@ -26,36 +33,34 @@ public sealed class StoreButtonController : MonoBehaviour
         if (!isBought)
             currencyManager.TakeCurrency(-currentPlaneData.price);
 
+        button.interactable = false;
         SavePlane(currentPlaneData, currentIndex);
-        UpdateButtonState();
+        ChangeCurrentState(isBought, currentIndex);
+        UpdateButtonInteractable(currentPlaneData, currentIndex);
     }
 
-    private void ChangeCurrentState(string state) => currentState.text = state;
+    private void ChangeCurrentState(bool isBought, int currentIndex)
+    {
+        if (!isBought && currentIndex != selectedPlaneIndex)
+            currentState.text = Buy;
+        else
+            currentState.text = Get;
+    }
 
     public void UpdateButtonInteractable(PlaneData currentPlaneData, int currentIndex)
     {
-        bool isBought = CheckForEnsure(currentPlaneData, currentIndex);
+        bool isBought = button.interactable = CheckForEnsure(currentPlaneData, currentIndex);
+        ChangeCurrentState(isBought, currentIndex);
 
-        buyButton.interactable = false;
-
-        ChangeCurrentState(Buy);
-
-        if (isBought)
-            ChangeCurrentState(Get);
-        if (isBought || currencyManager.GetCurrency >= currentPlaneData.price)
-            buyButton.interactable = true;
+        if (isBought || currencyManager.GetCurrency >= currentPlaneData.price && currentIndex != selectedPlaneIndex)
+            button.interactable = true;
     }
 
     private bool CheckForEnsure(PlaneData currentPlaneData, int currentIndex)
     {
+        selectedPlaneIndex = PlayerPrefs.GetInt(SelectedPlane, 0);
         string planeName = currentPlaneData.name;
-        return PlayerPrefs.GetInt(planeName + _IsBought, 0) == 1 || currentIndex == 0;
-    }
-
-    public void UpdateButtonState()
-    {
-        buyButton.interactable = false;
-        ChangeCurrentState(Get);
+        return (PlayerPrefs.GetInt(planeName + _IsBought, 0) == 1) && currentIndex != selectedPlaneIndex;
     }
 
     private void SavePlane(PlaneData currentPlaneData, int currentIndex)

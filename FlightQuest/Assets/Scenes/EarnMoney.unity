@@ -694,30 +694,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 978575439}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 278959013}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1826301107}
         m_TargetAssemblyTypeName: SceneManager, Assembly-CSharp
         m_MethodName: LoadScene
@@ -7897,6 +7873,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de2231266145d91488e57607ee0f254d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  locationOffset: {x: 0, y: 80, z: -200}
+  rotationOffset: {x: 10, y: 0, z: 0}
 --- !u!1 &978575439
 GameObject:
   m_ObjectHideFlags: 0
@@ -8783,7 +8761,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1257634636
 Transform:
   m_ObjectHideFlags: 0
@@ -9614,10 +9592,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planeData:
   - {fileID: 11400000, guid: b27c69ef954b65b418b2f3bcda3fc39f, type: 2}
-  - {fileID: 11400000, guid: 6c8bd329e7745cd41b36c5da5331f68e, type: 2}
-  - {fileID: 11400000, guid: 7bf93d6b18e1f56489876cb90c27f4ab, type: 2}
-  - {fileID: 11400000, guid: 155a762974cc7154990b119d6e6a48ca, type: 2}
-  - {fileID: 11400000, guid: 691a08705a36df64ea15b3fa0e2239b1, type: 2}
+  - {fileID: 11400000, guid: 78594f293027e274496c142525e9fdde, type: 2}
+  - {fileID: 11400000, guid: 419cfde73f6f31a4a9448941ce5278ce, type: 2}
+  - {fileID: 11400000, guid: 52a98894ac851d94081f66e4d45e9f29, type: 2}
+  - {fileID: 11400000, guid: 8dc4895c734fc0d4ea8d7f28b297feff, type: 2}
 --- !u!114 &1508751567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9745,9 +9723,9 @@ Transform:
   - {fileID: 438192951}
   - {fileID: 2074456219}
   - {fileID: 600642149}
-  - {fileID: 1508751565}
   - {fileID: 202349845}
   - {fileID: 392313083}
+  - {fileID: 1508751565}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1782540245

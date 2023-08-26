@@ -16,10 +16,11 @@ MonoBehaviour:
   price: 89300
   uniqueCode: 1
   speed: 600
-  acceleration: 50
+  acceleration: 0
+  deceleration: 0
   handling: 4
-  yawAmount: 50
-  pitchAmount: 40
-  pitchGroundAmount: 50
-  rollAmount: 90
-  rotationSmoothSpeed: 1.4
+  yawAmount: 0
+  pitchAmount: 0
+  groundPitchAmount: 0
+  rollAmount: 0
+  rotationSmoothSpeed: 0

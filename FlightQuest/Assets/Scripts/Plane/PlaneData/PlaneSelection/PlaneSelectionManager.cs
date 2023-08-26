@@ -39,7 +39,7 @@ public sealed class PlaneSelectionManager : MonoBehaviour
 
         SpaawnPlane();
 
-        cameraManager.OnPlaneInstanceReady(planeInstance);
+        cameraManager.OnPlaneInstanceReady(planeInstance, currentPlaneData);
 
         NotifyObservers();
     }

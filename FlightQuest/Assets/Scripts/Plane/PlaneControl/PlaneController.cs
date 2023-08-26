@@ -13,7 +13,7 @@ namespace PlaneSection
         [HideInInspector] public int groundPitchAmount;
         [HideInInspector] public int rollAmount;
 
-        private const float lowSpeed = 100;
+        private const float lowSpeed = 200;
 
         private void Awake()
         {

@@ -16,11 +16,11 @@ MonoBehaviour:
   price: 0
   uniqueCode: 0
   speed: 350
-  acceleration: 50
+  acceleration: 30
   deceleration: 30
   handling: 7
-  yawAmount: 50
-  pitchAmount: 50
-  groundPitchAmount: 0
-  rollAmount: 70
-  rotationSmoothSpeed: 1
+  yawAmount: 30
+  pitchAmount: 30
+  groundPitchAmount: 15
+  rollAmount: 60
+  rotationSmoothSpeed: 1.2

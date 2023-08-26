@@ -5,21 +5,38 @@ namespace CameraOption
 {
     public sealed class CameraManager : MonoBehaviour, ILandable
     {
+        private PlaneData planeData;
         private Transform target;
 
-        private Vector3 locationOffset = new Vector3(0f, 80f, -200);
-        private Vector3 rotationOffset = new Vector3(10f, 0f, 0);
+        [SerializeField] private Vector3 locationOffset = new Vector3(0f, 80f, -200);
+        [SerializeField] private Vector3 rotationOffset = new Vector3(10f, 0f, 0);
 
-        [HideInInspector] private float upCoordOfCamera = 80f;
-        [HideInInspector] private float upRotationOfCamera = 10f;
+        private float upCoordOfCamera = 80f;
+        private float upRotationOfCamera = 10f;
+        private float downCoordOfCamera = 30f;
+        private float downRotationOfCamera = 0f;
 
-        [HideInInspector] private float downCoordOfCamera = 30f;
-        [HideInInspector] private float downRotationOfCamera = 0f;
+        private float heavyUpCoordOfCamera = 100f;
+        private float heavyDownCoordOfCamera = 40f;
+
+        private float heavyZCoord = -320;
 
         private const float smoothSpeed = 0.125f;
         private bool hasEntered = false;
 
-        public void OnPlaneInstanceReady(GameObject planeInstance) => target = planeInstance.transform;
+        public void OnPlaneInstanceReady(GameObject planeInstance, PlaneData planeData)
+        {
+            target = planeInstance.transform;
+            this.planeData = planeData;
+
+            if (planeData.uniqueCode != 0)
+            {
+                upCoordOfCamera = heavyUpCoordOfCamera;
+                downCoordOfCamera = heavyDownCoordOfCamera;
+
+                locationOffset = new Vector3(0f, heavyUpCoordOfCamera, heavyZCoord);
+            }
+        }
 
         private void FixedUpdate()
         {
@@ -30,26 +47,6 @@ namespace CameraOption
             Quaternion desiredrotation = target.rotation * Quaternion.Euler(rotationOffset);
             Quaternion smoothedrotation = Quaternion.Lerp(transform.rotation, desiredrotation, smoothSpeed);
             transform.rotation = smoothedrotation;
-        }
-
-        private IEnumerator SmoothlyTransitionCamera(Vector3 targetLocationOffset, Vector3 targetRotationOffset, float duration)
-        {
-            Vector3 initialLocationOffset = locationOffset;
-            Vector3 initialRotationOffset = rotationOffset;
-
-            float elapsedTime = 0f;
-
-            while (elapsedTime < duration)
-            {
-                locationOffset = Vector3.Lerp(initialLocationOffset, targetLocationOffset, elapsedTime / duration);
-                rotationOffset = Vector3.Lerp(initialRotationOffset, targetRotationOffset, elapsedTime / duration);
-
-                yield return null;
-                elapsedTime += Time.deltaTime;
-            }
-
-            locationOffset = targetLocationOffset;
-            rotationOffset = targetRotationOffset;
         }
 
         public void ExecuteLand()
@@ -72,6 +69,26 @@ namespace CameraOption
             float transitionDuration = 1.0f;
 
             StartCoroutine(SmoothlyTransitionCamera(targetLocationOffset, targetRotationOffset, transitionDuration));
+        }
+
+        private IEnumerator SmoothlyTransitionCamera(Vector3 targetLocationOffset, Vector3 targetRotationOffset, float duration)
+        {
+            Vector3 initialLocationOffset = locationOffset;
+            Vector3 initialRotationOffset = rotationOffset;
+
+            float elapsedTime = 0f;
+
+            while (elapsedTime < duration)
+            {
+                locationOffset = Vector3.Lerp(initialLocationOffset, targetLocationOffset, elapsedTime / duration);
+                rotationOffset = Vector3.Lerp(initialRotationOffset, targetRotationOffset, elapsedTime / duration);
+
+                yield return null;
+                elapsedTime += Time.deltaTime;
+            }
+
+            locationOffset = targetLocationOffset;
+            rotationOffset = targetRotationOffset;
         }
     }
 }

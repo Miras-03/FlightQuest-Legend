@@ -6,11 +6,15 @@ using PlaneSection;
 public sealed class LandingGear : MonoBehaviour, ILandable
 {
     private AirPlane plane;
-    [SerializeField] private Animator anim;
+    [SerializeField] private Animator[] animators;
 
     private Slider lever;
 
     private float forceSpeed = 100f;
+
+    private const string PullUp = nameof(PullUp);
+    private const string PullDown = nameof(PullDown);
+
     private bool hasEntered = false;
 
     [Inject]
@@ -25,13 +29,17 @@ public sealed class LandingGear : MonoBehaviour, ILandable
     {
         if (!hasEntered)
         {
-            anim.Play("PullUp");
+            foreach (Animator anim in animators)
+                anim.Play(PullUp);
+
             plane.maxSpeed += forceSpeed;
             SetLeverValue();
         }
         else
         {
-            anim.Play("PullDown");
+            foreach (Animator anim in animators)
+                anim.Play(PullDown);
+
             plane.maxSpeed -= forceSpeed;
             SetLeverValue();
         }

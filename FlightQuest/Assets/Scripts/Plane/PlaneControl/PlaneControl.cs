@@ -13,11 +13,11 @@ namespace PlaneSection
         private float pitch;
         private float roll;
 
-        [HideInInspector] public float yawAmount;
-        [HideInInspector] public float pitchAmount;
-        [HideInInspector] public float rollAmount;
+        [HideInInspector] public int yawAmount;
+        [HideInInspector] public int pitchAmount;
+        [HideInInspector] public int rollAmount;
 
-        [HideInInspector] public int rotationSmoothSpeed;
+        [HideInInspector] public float rotationSmoothSpeed;
 
         private float currentYawVelocity;
         private float currentPitchVelocity;

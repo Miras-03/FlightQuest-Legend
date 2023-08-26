@@ -18,8 +18,7 @@ public sealed class PlaneChanger : MonoBehaviour
     private void Start()
     {
         currentIndex = PlayerPrefs.GetInt(SelectedPlane, 0);
-        ChangePlaneData(currentIndex);
-        storeButton.UpdateButtonState();
+        ChangePlaneData(0);
     }
 
     public void ChangePlaneData(int change)

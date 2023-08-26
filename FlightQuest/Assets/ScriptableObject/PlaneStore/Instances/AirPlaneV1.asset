@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cac2217240c70a04385a3b47c4db0831, type: 3}
-  m_Name: PlaneV3
+  m_Name: AirPlaneV1
   m_EditorClassIdentifier: 
-  planeModel: {fileID: 6783042612740966625, guid: 7a4952846ba09894b99aeabfdafb8ec0, type: 3}
-  price: 310
+  planeModel: {fileID: 6003528510244423718, guid: 29dd2368d2b064b41a410dae54aa1dd5, type: 3}
+  price: 0
   uniqueCode: 1
-  speed: 990
-  acceleration: 100
-  handling: 7
-  yawAmount: 50
+  speed: 600
+  acceleration: 50
+  deceleration: 20
+  handling: 5
+  yawAmount: 20
   pitchAmount: 40
-  pitchGroundAmount: 50
-  rollAmount: 90
-  rotationSmoothSpeed: 1.4
+  groundPitchAmount: 5
+  rollAmount: 110
+  rotationSmoothSpeed: 1.5
