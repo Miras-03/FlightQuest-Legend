@@ -1,15 +1,26 @@
 using UnityEngine;
 using System.Collections;
+using Zenject;
 
 namespace PlaneSection
 {
     public sealed class PlaneExplosion : MonoBehaviour, IDieable
     {
+        private SceneManager sceneManager;
         private AirPlane plane;
         [SerializeField] private GameObject[] planeBodies;
         [SerializeField] private ParticleSystem explosionEffect;
 
+        private AudioSource[] explosionSound;
+
         private const int lowSpeed = 10;
+
+        [Inject]
+        public void Construct(SceneManager sceneManager, AudioSource[] explosionSound)
+        {
+            this.sceneManager = sceneManager;
+            this.explosionSound = explosionSound;
+        }
 
         private void Awake() => plane = GetComponent<AirPlane>();
 
@@ -21,6 +32,7 @@ namespace PlaneSection
 
         private void Explode()
         {
+            explosionSound[1].Play();
             plane.isBurned = true;
             explosionEffect.Play();
             SwapBodies();
@@ -36,7 +48,7 @@ namespace PlaneSection
         private IEnumerator RestartAfterDelay()
         {
             yield return new WaitForSeconds(3f);
-            SceneManager.RestartScene();
+            sceneManager.RestartScene();
         }
     }
 }

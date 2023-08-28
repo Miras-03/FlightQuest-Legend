@@ -5102,6 +5102,7 @@ GameObject:
   - component: {fileID: 621843630225774804}
   - component: {fileID: 5971176438422381005}
   - component: {fileID: 478103395138919545}
+  - component: {fileID: 5565812527234342281}
   m_Layer: 0
   m_Name: LightPlane
   m_TagString: Untagged
@@ -5285,6 +5286,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animators:
   - {fileID: 7850586441629719945}
+--- !u!114 &5565812527234342281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2928791022217692888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e9b50dcb9d856b4ca235c804db2a73f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minPitch: 0.5
+  maxPitch: 3
 --- !u!1 &2950455106996085442
 GameObject:
   m_ObjectHideFlags: 0

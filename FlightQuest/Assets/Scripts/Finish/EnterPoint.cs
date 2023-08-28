@@ -1,11 +1,18 @@
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 public sealed class EnterPoint : MonoBehaviour
 {
+    private SceneManager sceneManager;
     private ExecuteFinishObservers executeFinishObserver;
 
-    private void Awake() => executeFinishObserver = GetComponentInParent<ExecuteFinishObservers>();
+    [Inject]
+    public void Constructor(SceneManager sceneManager)
+    {
+        this.sceneManager = sceneManager;
+        executeFinishObserver = GetComponentInParent<ExecuteFinishObservers>();
+    }
 
     private void OnTriggerEnter()=> StartCoroutine(WaitForLose());
 
@@ -13,6 +20,6 @@ public sealed class EnterPoint : MonoBehaviour
     {
         yield return new WaitForSeconds(20);
         if (!executeFinishObserver.isReachedFinishPoint)
-            SceneManager.RestartScene();
+            sceneManager.RestartScene();
     }
 }

@@ -11,6 +11,8 @@ public sealed class StoreButtonController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentState;
     [SerializeField] private Button button;
 
+    private AudioSource[] buySound;
+
     private int selectedPlaneIndex;
 
     private const string _IsBought = nameof(_IsBought);
@@ -20,9 +22,11 @@ public sealed class StoreButtonController : MonoBehaviour
     private const string Buy = nameof(Buy);
 
     [Inject]
-    public void Construct(CurrencyManager currencyManager)
+    public void Construct(CurrencyManager currencyManager, AudioSource[] buySound)
     {
         this.currencyManager = currencyManager;
+        this.buySound = buySound;
+
         selectedPlaneIndex = PlayerPrefs.GetInt(SelectedPlane, 0);
     }
 
@@ -31,7 +35,10 @@ public sealed class StoreButtonController : MonoBehaviour
         bool isBought = CheckForEnsure(currentPlaneData, currentIndex);
 
         if (!isBought)
+        {
+            buySound[0].Play();
             currencyManager.TakeCurrency(-currentPlaneData.price);
+        }
 
         button.interactable = false;
         SavePlane(currentPlaneData, currentIndex);

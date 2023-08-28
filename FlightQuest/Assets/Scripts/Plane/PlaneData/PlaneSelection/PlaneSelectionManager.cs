@@ -25,9 +25,8 @@ public sealed class PlaneSelectionManager : MonoBehaviour
     {
         this.container = container;
         this.cameraManager = cameraManager;
+        LoadSelectedPlane();
     }
-
-    private void Start() => LoadSelectedPlane();
 
     public static void SaveSelectedPlane(int index) => PlayerPrefs.SetInt(SelectedPlane, index);
 
@@ -37,7 +36,7 @@ public sealed class PlaneSelectionManager : MonoBehaviour
 
         GameObject planeInstance = container.InstantiatePrefab(currentPlaneData.planeModel);
 
-        SpaawnPlane();
+        SpawnPlane();
 
         cameraManager.OnPlaneInstanceReady(planeInstance, currentPlaneData);
 
@@ -50,7 +49,7 @@ public sealed class PlaneSelectionManager : MonoBehaviour
         currentPlaneData = (PlaneData)planeData[index];
     }
 
-    private void SpaawnPlane()
+    private void SpawnPlane()
     {
         plane = FindObjectOfType<AirPlane>();
         planeControl = FindObjectOfType<PlaneControl>();

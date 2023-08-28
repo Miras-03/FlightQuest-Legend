@@ -1,8 +1,13 @@
 using UnityEngine;
+using Zenject;
 
 public sealed class LandingSmoke : MonoBehaviour
 {
     [SerializeField] private ParticleSystem smoke;
+    private AudioSource[] touchLand;
+
+    [Inject]
+    public void Constructor(AudioSource[] touchLand) => this.touchLand = touchLand;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -10,7 +15,10 @@ public sealed class LandingSmoke : MonoBehaviour
         Vector3 relativeVelocity = collision.relativeVelocity;
         float impactForce = relativeVelocity.magnitude;
 
-        if(impactForce > impactForceThreshold)
+        if (impactForce > impactForceThreshold)
+        {
+            touchLand[2].Play();
             smoke.Play();
+        }
     }
 }

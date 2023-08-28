@@ -8,12 +8,16 @@ public sealed class DeathManager : MonoBehaviour
 
     private SpeedManager speedManager;
     private PlaneExplosion planeExplosion;
+    private EngineSoundController engineSoundController;
 
     private bool injected = false;
 
     [Inject]
-    public void Initialize(PrefabInitializationNotifier notifier) => 
+    public void Initialize(PrefabInitializationNotifier notifier, PlayerDeath playerDeath)
+    {
+        this.playerDeath = playerDeath;
         notifier.OnPrefabInitialized += InjectAfterDelay;
+    }
 
     private void InjectAfterDelay()
     {
@@ -23,14 +27,13 @@ public sealed class DeathManager : MonoBehaviour
 
             speedManager = FindObjectOfType<SpeedManager>();
             planeExplosion = FindObjectOfType<PlaneExplosion>();
+            engineSoundController = FindObjectOfType<EngineSoundController>();
 
             playerDeath.AddObservers(speedManager);
             playerDeath.AddObservers(planeExplosion);
+            playerDeath.AddObservers(engineSoundController);
         }
     }
-
-    [Inject]
-    public void Constructor(PlayerDeath playerDeath) => this.playerDeath = playerDeath;
 
     private void OnDisable() => playerDeath.RemoveObservers();
 }

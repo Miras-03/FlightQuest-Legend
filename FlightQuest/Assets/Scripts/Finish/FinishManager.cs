@@ -15,8 +15,11 @@ public sealed class FinishManager : MonoBehaviour
     private bool injected;
 
     [Inject]
-    public void Initialize(PrefabInitializationNotifier notifier) =>
+    public void Initialize(PrefabInitializationNotifier notifier, FinishLine finishLine)
+    {
+        this.finishLine = finishLine;
         notifier.OnPrefabInitialized += InjectAfterDelay;
+    }
 
     private void InjectAfterDelay()
     {
@@ -35,9 +38,6 @@ public sealed class FinishManager : MonoBehaviour
             finishLine.AddObservers(levelManager);
         }
     }
-
-    [Inject]
-    public void Constructor(FinishLine finishLine) => this.finishLine = finishLine;
 
     private void OnDisable() => finishLine.RemoveObservers();
 }

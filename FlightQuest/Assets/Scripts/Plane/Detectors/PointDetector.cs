@@ -7,12 +7,14 @@ namespace PlaneSection
 {
     public sealed class PointDetector : MonoBehaviour, ILandable
     {
-        private Slider lever;
-        [SerializeField] private ParticleSystem selectionEffect;
-
+        private SceneManager sceneManager;
         private PetrolLevel petrolLevel;
         private AirPlane plane;
         private PropellerRotate propellerRotate;
+
+        private Slider lever;
+        private AudioSource[] selectionSound;
+        [SerializeField] private ParticleSystem selectionEffect;
 
         private Coroutine petrolCoroutine;
 
@@ -26,11 +28,14 @@ namespace PlaneSection
         private bool hasEntered = false;
 
         [Inject]
-        public void Construct(PetrolLevel petrolLevel, Slider lever, PropellerRotate propellerRotate)
+        public void Construct(SceneManager sceneManager, PetrolLevel petrolLevel, Slider lever, 
+            PropellerRotate propellerRotate, AudioSource[] selectionSound)
         {
+            this.sceneManager = sceneManager;
             this.petrolLevel = petrolLevel;
             this.lever = lever;
             this.propellerRotate = propellerRotate;
+            this.selectionSound = selectionSound;
 
             plane = GetComponent<AirPlane>();
         }
@@ -64,13 +69,14 @@ namespace PlaneSection
         private IEnumerator WaitForDelay()
         {
             yield return new WaitForSeconds(5);
-            SceneManager.RestartScene();
+            sceneManager.RestartScene();
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Point") && !isFailed)
             {
+                selectionSound[0].Play();
                 selectionEffect.Play();
                 SetValue();
                 Destroy(other.gameObject);

@@ -6,6 +6,7 @@ using Zenject;
 
 public sealed class ExecuteFinishObservers : MonoBehaviour
 {
+    private SceneManager sceneManager;
     private FinishLine finishLine;
 
     [SerializeField] private MeshRenderer meshRenderer;
@@ -21,7 +22,11 @@ public sealed class ExecuteFinishObservers : MonoBehaviour
     private const int perSeconds = 1;
 
     [Inject]
-    public void Constuctor(FinishLine finishLine) => this.finishLine = finishLine;
+    public void Constuctor(SceneManager sceneManager, FinishLine finishLine)
+    {
+        this.sceneManager = sceneManager;
+        this.finishLine = finishLine;
+    }
 
     private void OnTriggerEnter()
     {
@@ -55,6 +60,6 @@ public sealed class ExecuteFinishObservers : MonoBehaviour
         if (!isReachedLosePoint)
             finishLine.NotifyObserversAboutFinish();
         else
-            SceneManager.RestartScene();
+            sceneManager.RestartScene();
     }
 }
