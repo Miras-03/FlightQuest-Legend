@@ -1,10 +1,9 @@
-using PlaneSection;
 using System.Collections;
 using TMPro;
 using UnityEngine;
 using Zenject;
 
-public sealed class ExecuteFinishObservers : MonoBehaviour
+public sealed class ExecuteFinishObservers : MonoBehaviour, IDieable
 {
     private SceneManager sceneManager;
     private FinishLine finishLine;
@@ -56,10 +55,18 @@ public sealed class ExecuteFinishObservers : MonoBehaviour
             yield return new WaitForSeconds(1);
             time -= perSeconds;
         }
-        waitForTimeIndicator.enabled = false;
+        TurnOffText();
         if (!isReachedLosePoint)
             finishLine.NotifyObserversAboutFinish();
         else
             sceneManager.RestartScene();
+    }
+
+    public void TurnOffText() => waitForTimeIndicator.enabled = false;
+
+    public void ExecuteExplode()
+    {
+        TurnOffText();
+        isReachedLosePoint = !isReachedLosePoint;
     }
 }

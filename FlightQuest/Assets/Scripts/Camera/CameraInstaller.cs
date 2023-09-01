@@ -3,5 +3,9 @@ using Zenject;
 
 public sealed class CameraInstaller : MonoInstaller
 {
-    public override void InstallBindings() => Container.Bind<CameraManager>().FromComponentInHierarchy().AsSingle();
+    public override void InstallBindings()
+    {
+        Container.Bind<CameraManager>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<CameraStartPosition>().FromComponentInHierarchy().AsSingle();
+    }
 }

@@ -16,16 +16,20 @@ namespace PlaneSection
         private AirPlane plane;
         private PropellerRotate propellerRotate;
         private PointDetector pointDetector;
+
         private CameraManager cameraManager;
+        private CameraStartPosition cameraStartPosition;
+
         private UIAnimationManager managerOfUIAnimation;
 
         private bool isCameraEnabled = false;
 
         [Inject]
         public void Contruct(CameraManager cameraManager, Slider speedLever, PropellerRotate propellerRotate, 
-            UIAnimationManager managerOfUIAnimation)
+            UIAnimationManager managerOfUIAnimation, CameraStartPosition cameraStartPosition)
         {
             this.propellerRotate = propellerRotate;
+            this.cameraStartPosition = cameraStartPosition;
             this.cameraManager = cameraManager;
             this.speedLever = speedLever;
             this.managerOfUIAnimation = managerOfUIAnimation;
@@ -62,6 +66,7 @@ namespace PlaneSection
         private void SetCamera()
         {
             isCameraEnabled = !isCameraEnabled;
+            cameraStartPosition.enabled = !isCameraEnabled;
             cameraManager.enabled = isCameraEnabled;
         }
 

@@ -33,14 +33,14 @@ public class UIAnimationManager : MonoBehaviour
         }
     }
 
+    private void OnDisable() => SpeedManager.OnShiftUIElements -= SetUIElements;
+
     private void SetUIElements()
     {
         cursor.SetActive(false);
         foreach (Animator anim in animators)
             anim.enabled = true;
         StartCoroutine(WaitForSetUI());
-
-        SpeedManager.OnShiftUIElements -= SetUIElements;
     }
 
     private IEnumerator WaitForSetUI()

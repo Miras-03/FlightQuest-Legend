@@ -9,6 +9,7 @@ public sealed class DeathManager : MonoBehaviour
     private SpeedManager speedManager;
     private PlaneExplosion planeExplosion;
     private EngineSoundController engineSoundController;
+    [SerializeField] private ExecuteFinishObservers executeFinishObservers;
 
     private bool injected = false;
 
@@ -32,6 +33,7 @@ public sealed class DeathManager : MonoBehaviour
             playerDeath.AddObservers(speedManager);
             playerDeath.AddObservers(planeExplosion);
             playerDeath.AddObservers(engineSoundController);
+            playerDeath.AddObservers(executeFinishObservers);
         }
     }
 

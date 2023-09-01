@@ -8,9 +8,12 @@ public sealed class FinishManager : MonoBehaviour
 
     [Header("FinishObservers")]
     [SerializeField] private LevelManager levelManager;
+    private SpeedManager speedManager;
     private UIManager managerUI;
     private ParticleSystemManager particleSystemManager;
-    private SpeedManager speedManager;
+
+    [SerializeField] private CanisterSpawner canisterSpawner;
+    [SerializeField] private ShipSpawner shipSpawner;
 
     private bool injected;
 
@@ -36,6 +39,8 @@ public sealed class FinishManager : MonoBehaviour
             finishLine.AddObservers(managerUI);
             finishLine.AddObservers(speedManager);
             finishLine.AddObservers(levelManager);
+            finishLine.AddObservers(canisterSpawner);
+            finishLine.AddObservers(shipSpawner);
         }
     }
 

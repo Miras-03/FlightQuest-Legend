@@ -7,6 +7,6 @@ public sealed class LosePoint : MonoBehaviour
     private void OnTriggerEnter()
     {
         executeFinishObserver.isReachedLosePoint = true;
-        executeFinishObserver.waitForTimeIndicator.enabled = false;
+        executeFinishObserver.TurnOffText();
     }
 }

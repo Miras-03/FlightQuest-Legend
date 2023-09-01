@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 2833155065029776487}
   - component: {fileID: 1094458975973940677}
   - component: {fileID: 8668023618049991436}
+  - component: {fileID: 3774241055881030105}
   m_Layer: 0
   m_Name: AirPlaneV3
   m_TagString: Untagged
@@ -204,6 +205,18 @@ MonoBehaviour:
   - {fileID: 4796506378363539437}
   - {fileID: 4725622670374023382}
   - {fileID: 3536691009422653640}
+--- !u!114 &3774241055881030105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765378686930086397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e9b50dcb9d856b4ca235c804db2a73f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2117433236351166529
 GameObject:
   m_ObjectHideFlags: 0

@@ -5477,6 +5477,7 @@ GameObject:
   - component: {fileID: 23904300395929646}
   - component: {fileID: 8823707008534802170}
   - component: {fileID: 1315647926675171815}
+  - component: {fileID: 7391940871439723298}
   m_Layer: 0
   m_Name: AirPlaneV1
   m_TagString: Untagged
@@ -5662,6 +5663,18 @@ MonoBehaviour:
   - {fileID: 9092919382390621743}
   - {fileID: 2500692009600302512}
   - {fileID: 8729110797328586682}
+--- !u!114 &7391940871439723298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6003528510244423718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e9b50dcb9d856b4ca235c804db2a73f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6076368898106006077
 GameObject:
   m_ObjectHideFlags: 0

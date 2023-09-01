@@ -15,7 +15,7 @@ MonoBehaviour:
   planeModel: {fileID: 5588413167485372887, guid: f8c3b65648d88284e8a74f107c8cbb56, type: 3}
   price: 13700
   uniqueCode: 0
-  speed: 450
+  speed: 350
   acceleration: 0
   deceleration: 0
   handling: 9

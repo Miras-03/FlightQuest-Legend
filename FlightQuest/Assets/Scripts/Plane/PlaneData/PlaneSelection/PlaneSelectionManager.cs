@@ -14,6 +14,7 @@ public sealed class PlaneSelectionManager : MonoBehaviour
     private AirPlane plane;
 
     private CameraManager cameraManager;
+    private CameraStartPosition cameraStartPosition;
 
     [SerializeField] private ScriptableObject[] planeData;
 
@@ -21,10 +22,13 @@ public sealed class PlaneSelectionManager : MonoBehaviour
     private int index = 0;
 
     [Inject]
-    public void Constructor(DiContainer container, CameraManager cameraManager)
+    public void Constructor(DiContainer container, CameraManager cameraManager, 
+        CameraStartPosition cameraStartPosition)
     {
         this.container = container;
         this.cameraManager = cameraManager;
+        this.cameraStartPosition = cameraStartPosition;
+
         LoadSelectedPlane();
     }
 
@@ -39,6 +43,7 @@ public sealed class PlaneSelectionManager : MonoBehaviour
         SpawnPlane();
 
         cameraManager.OnPlaneInstanceReady(planeInstance, currentPlaneData);
+        cameraStartPosition.SetTheCamera(currentPlaneData);
 
         NotifyObservers();
     }

@@ -8,6 +8,7 @@ namespace PlaneSection
     {
         private SceneManager sceneManager;
         private AirPlane plane;
+
         [SerializeField] private GameObject[] planeBodies;
         [SerializeField] private ParticleSystem explosionEffect;
 

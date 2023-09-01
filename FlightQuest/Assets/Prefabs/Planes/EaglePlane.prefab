@@ -5044,6 +5044,7 @@ GameObject:
   - component: {fileID: 9039055036764067706}
   - component: {fileID: 2776699191258932693}
   - component: {fileID: 2015942337876060194}
+  - component: {fileID: 3094481196258336847}
   m_Layer: 0
   m_Name: EaglePlane
   m_TagString: Untagged
@@ -5225,7 +5226,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd7281ebe369a54ab6f7dae7b6a206b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 6039339855698671926}
+  animators: []
+--- !u!114 &3094481196258336847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6231843761764582766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e9b50dcb9d856b4ca235c804db2a73f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7383242437698329490
 GameObject:
   m_ObjectHideFlags: 0

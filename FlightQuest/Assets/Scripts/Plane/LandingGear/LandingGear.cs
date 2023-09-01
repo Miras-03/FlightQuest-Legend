@@ -2,9 +2,11 @@ using Zenject;
 using UnityEngine;
 using UnityEngine.UI;
 using PlaneSection;
+using System.Collections;
 
 public sealed class LandingGear : MonoBehaviour, ILandable
 {
+    private SceneManager sceneManager;
     private AirPlane plane;
     [SerializeField] private Animator[] animators;
 
@@ -16,10 +18,12 @@ public sealed class LandingGear : MonoBehaviour, ILandable
     private const string PullDown = nameof(PullDown);
 
     private bool hasEntered = false;
+    private bool hasExited = false;
 
     [Inject]
-    public void Construct(Slider lever)
+    public void Construct(SceneManager sceneManager, Slider lever)
     {
+        this.sceneManager = sceneManager;
         this.lever = lever;
 
         plane = GetComponent<AirPlane>();
@@ -32,7 +36,7 @@ public sealed class LandingGear : MonoBehaviour, ILandable
             foreach (Animator anim in animators)
                 anim.Play(PullUp);
 
-            plane.maxSpeed += forceSpeed;
+            plane.maxPossibleSpeed += forceSpeed;
             SetLeverValue();
         }
         else
@@ -40,8 +44,9 @@ public sealed class LandingGear : MonoBehaviour, ILandable
             foreach (Animator anim in animators)
                 anim.Play(PullDown);
 
-            plane.maxSpeed -= forceSpeed;
+            plane.maxPossibleSpeed -= forceSpeed;
             SetLeverValue();
+            StartCoroutine(WaitForLose());
         }
         hasEntered = !hasEntered;
     }
@@ -50,6 +55,11 @@ public sealed class LandingGear : MonoBehaviour, ILandable
     {
         float maxSpeed = plane.maxSpeed;
         lever.maxValue = maxSpeed;
-        lever.value = maxSpeed;
+    }
+
+    private IEnumerator WaitForLose()
+    {
+        yield return new WaitForSeconds(30);
+        sceneManager.RestartScene();
     }
 }

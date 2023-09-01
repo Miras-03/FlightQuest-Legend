@@ -8,8 +8,8 @@ namespace CameraOption
         private PlaneData planeData;
         private Transform target;
 
-        [SerializeField] private Vector3 locationOffset = new Vector3(0f, 80f, -200);
-        [SerializeField] private Vector3 rotationOffset = new Vector3(10f, 0f, 0);
+        private Vector3 locationOffset = new Vector3(0f, 80f, -200);
+        private Vector3 rotationOffset = new Vector3(10f, 0f, 0);
 
         private float upCoordOfCamera = 80f;
         private float upRotationOfCamera = 10f;
