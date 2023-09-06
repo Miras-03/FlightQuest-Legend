@@ -1,0 +1,39 @@
+using UnityEngine;
+using UnityEngine.Advertisements;
+
+public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
+{
+    private InterstitialAd interstitialAd;
+    private RewardedAdButton rewardedAdButton;
+
+    private const string androidGameId = "5403455";
+    private const string iOSGameId = "5403454";
+
+    [SerializeField] private bool _testMode = true;
+    private string _gameId;
+
+    private void Awake()
+    {
+        interstitialAd = GetComponent<InterstitialAd>();
+        rewardedAdButton = GetComponent<RewardedAdButton>();
+
+        InitializeAds();
+    }
+
+    public void InitializeAds()
+    {
+    #if UNITY_IOS
+            _gameId = _iOSGameId;
+    #elif UNITY_ANDROID
+            _gameId = androidGameId;
+    #elif UNITY_EDITOR
+            _gameId = _androidGameId;
+    #endif
+        if (!Advertisement.isInitialized && Advertisement.isSupported)
+            Advertisement.Initialize(_gameId, _testMode, this);
+    }
+
+    public void OnInitializationComplete() => interstitialAd.LoadAd();
+
+    public void OnInitializationFailed(UnityAdsInitializationError error, string message) { }
+}

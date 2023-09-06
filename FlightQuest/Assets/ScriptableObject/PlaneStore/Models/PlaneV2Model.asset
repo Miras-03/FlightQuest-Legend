@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlaneV2Model
   m_EditorClassIdentifier: 
   planeModel: {fileID: 4545996795517209006, guid: a525964e6a1c67f41963089a35d091ab, type: 3}
-  price: 421000
+  price: 221000
   uniqueCode: 1
   speed: 770
   acceleration: 0

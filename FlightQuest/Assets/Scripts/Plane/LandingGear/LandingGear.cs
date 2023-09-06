@@ -18,7 +18,7 @@ public sealed class LandingGear : MonoBehaviour, ILandable
     private const string PullDown = nameof(PullDown);
 
     private bool hasEntered = false;
-    private bool hasExited = false;
+    public static bool hasExit = false;
 
     [Inject]
     public void Construct(SceneManager sceneManager, Slider lever)
@@ -37,7 +37,7 @@ public sealed class LandingGear : MonoBehaviour, ILandable
                 anim.Play(PullUp);
 
             plane.maxPossibleSpeed += forceSpeed;
-            SetLeverValue();
+            SetLeverValue(plane.maxPossibleSpeed);
         }
         else
         {
@@ -45,21 +45,18 @@ public sealed class LandingGear : MonoBehaviour, ILandable
                 anim.Play(PullDown);
 
             plane.maxPossibleSpeed -= forceSpeed;
-            SetLeverValue();
+            SetLeverValue(plane.maxPossibleSpeed);
             StartCoroutine(WaitForLose());
         }
         hasEntered = !hasEntered;
     }
 
-    private void SetLeverValue()
-    {
-        float maxSpeed = plane.maxSpeed;
-        lever.maxValue = maxSpeed;
-    }
+    private void SetLeverValue(float maxSpeed) => lever.maxValue = maxSpeed;
 
     private IEnumerator WaitForLose()
     {
-        yield return new WaitForSeconds(30);
-        sceneManager.RestartScene();
+        yield return new WaitForSeconds(15);
+        if (!hasExit)
+            sceneManager.RestartScene();
     }
 }

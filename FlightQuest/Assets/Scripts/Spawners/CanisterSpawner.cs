@@ -1,11 +1,12 @@
+using System.Data;
 using UnityEngine;
 
 public sealed class CanisterSpawner : MonoBehaviour, IFinishable
 {
-    [SerializeField] private GameObject prefabToSpawn;
-    [SerializeField] private GameObject airportPlace;
-    public int canisterCount; 
-    public int distance;
+    [SerializeField] private GameObject canisterPrefab;
+
+    private int canisterCount; 
+    private int distance;
 
     private const int minX = -300;
     private const int maxX = 300;
@@ -33,13 +34,9 @@ public sealed class CanisterSpawner : MonoBehaviour, IFinishable
         randomPosition = transform.position;
         for (int i = 0; i < canisterCount; i++)
         {
-            Instantiate(prefabToSpawn, randomPosition, Quaternion.identity);
+            Instantiate(canisterPrefab, randomPosition, Quaternion.identity);
             randomPosition = GenerateRandomPosition();
         }
-
-        float airPortDistance = randomPosition.z + distance;
-        Vector3 airportPosition = new Vector3(0f, 0f, airPortDistance);
-        airportPlace.transform.position = airportPosition;
     }
 
     private Vector3 GenerateRandomPosition()

@@ -6,10 +6,12 @@ using Zenject;
 public sealed class StoreButtonController : MonoBehaviour
 {
     private CurrencyManager currencyManager;
+    private CrystalManager moneyManager;
 
     [Header("UI Elements")]
-    [SerializeField] private TextMeshProUGUI currentState;
-    [SerializeField] private Button button;
+    [SerializeField] private TextMeshProUGUI currentPrice;
+    [SerializeField] private TextMeshProUGUI textOfBuyButton;
+    [SerializeField] private Button buyButton;
 
     private AudioSource[] buySound;
 
@@ -22,9 +24,10 @@ public sealed class StoreButtonController : MonoBehaviour
     private const string Buy = nameof(Buy);
 
     [Inject]
-    public void Construct(CurrencyManager currencyManager, AudioSource[] buySound)
+    public void Construct(CurrencyManager currencyManager, CrystalManager moneyManager, AudioSource[] buySound)
     {
         this.currencyManager = currencyManager;
+        this.moneyManager = moneyManager;
         this.buySound = buySound;
 
         selectedPlaneIndex = PlayerPrefs.GetInt(SelectedPlane, 0);
@@ -40,7 +43,7 @@ public sealed class StoreButtonController : MonoBehaviour
             currencyManager.TakeCurrency(-currentPlaneData.price);
         }
 
-        button.interactable = false;
+        buyButton.interactable = false;
         SavePlane(currentPlaneData, currentIndex);
         ChangeCurrentState(isBought, currentIndex);
         UpdateButtonInteractable(currentPlaneData, currentIndex);
@@ -49,18 +52,34 @@ public sealed class StoreButtonController : MonoBehaviour
     private void ChangeCurrentState(bool isBought, int currentIndex)
     {
         if (!isBought && currentIndex != selectedPlaneIndex)
-            currentState.text = Buy;
+            textOfBuyButton.text = Buy;
         else
-            currentState.text = Get;
+        {
+            textOfBuyButton.text = Get;
+            ChangeTextColor(Color.green);
+        }
     }
 
     public void UpdateButtonInteractable(PlaneData currentPlaneData, int currentIndex)
     {
-        bool isBought = button.interactable = CheckForEnsure(currentPlaneData, currentIndex);
+        ChangeTextColor(Color.red);
+
+        bool isBought = buyButton.interactable = CheckForEnsure(currentPlaneData, currentIndex);
         ChangeCurrentState(isBought, currentIndex);
 
-        if (isBought || currencyManager.GetCurrency >= currentPlaneData.price && currentIndex != selectedPlaneIndex)
-            button.interactable = true;
+        if (currentIndex != selectedPlaneIndex)
+        {
+            if (!currentPlaneData.gamePurchase && (isBought || currencyManager.GetCurrency >= currentPlaneData.price))
+            {
+                buyButton.interactable = true;
+                ChangeTextColor(Color.green);
+            }
+            else if (currentPlaneData.gamePurchase && (isBought || moneyManager.GetMoney >= currentPlaneData.price))
+            {
+                buyButton.interactable = true;
+                ChangeTextColor(Color.green);
+            }
+        }
     }
 
     private bool CheckForEnsure(PlaneData currentPlaneData, int currentIndex)
@@ -77,4 +96,6 @@ public sealed class StoreButtonController : MonoBehaviour
         PlayerPrefs.SetInt(planeName + _IsBought, 1);
         PlayerPrefs.Save();
     }
+
+    private void ChangeTextColor(Color color) => currentPrice.color = color;
 }

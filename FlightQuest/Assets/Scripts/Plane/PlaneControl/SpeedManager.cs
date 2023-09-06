@@ -79,7 +79,6 @@ namespace PlaneSection
         }
 
         public void ExecuteExplode() => SlowDown(10);
-
         public void ExecuteFinish() => SlowDown(0);
 
         private IEnumerator WaitForDelay()

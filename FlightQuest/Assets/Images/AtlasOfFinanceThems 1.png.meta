@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 341c8e29c51a79e4798bdf8679ba49c1
+guid: 1b07b0e775b9bc24b9c8f34129abac6b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -95,7 +95,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
-    maxTextureSize: 1024
+    maxTextureSize: 512
     resizeAlgorithm: 0
     textureFormat: 50
     textureCompression: 1
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: AtlasOfFinanceThems_0
+      name: AtlasOfFinanceThems 1_0
       rect:
         serializedVersion: 2
-        x: 28
-        y: 239
-        width: 213
-        height: 211
+        x: 1
+        y: 254
+        width: 245
+        height: 245
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 141bd48b3b2744343a6d68792f0ed497
-      internalID: -397914765
+      spriteID: ba886182059dfd14cac72462030deee3
+      internalID: 570512227
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AtlasOfFinanceThems_1
+      name: AtlasOfFinanceThems 1_1
       rect:
         serializedVersion: 2
-        x: 246
-        y: 46
-        width: 209
-        height: 186
+        x: 271
+        y: 270
+        width: 193
+        height: 197
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,8 +158,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06712a9250c40bd4f95c88b33a13292f
-      internalID: 805382149
+      spriteID: 9dfa15f9706082e48b924ac3243a0aa2
+      internalID: 986073336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasOfFinanceThems 1_2
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 14
+        width: 227
+        height: 229
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 416fd71cc29a2b444a2a9afdf12669ce
+      internalID: 1163602083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasOfFinanceThems 1_3
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 47
+        width: 193
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f50aa66f1d91424d9e396b2ce82c80f
+      internalID: 1316598498
       vertices: []
       indices: 
       edges: []
@@ -167,7 +209,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: da44aca34ff46f8478df1df124bbe14b
+    spriteID: 7d64633572e6d7f4d844457da6122547
     internalID: 0
     vertices: []
     indices: 
@@ -175,8 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      AtlasOfFinanceThems_0: -397914765
-      AtlasOfFinanceThems_1: 805382149
+      AtlasOfFinanceThems 1_0: 570512227
+      AtlasOfFinanceThems 1_1: 986073336
+      AtlasOfFinanceThems 1_2: 1163602083
+      AtlasOfFinanceThems 1_3: 1316598498
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

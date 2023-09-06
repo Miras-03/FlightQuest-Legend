@@ -66,6 +66,6 @@ public sealed class EngineSoundController : MonoBehaviour, IDieable
     private void SetMaxPitch()
     {
         if (planeIndex == 5)
-            maxPitch = 1.7f;
+            maxPitch = 1.4f;
     }
 }

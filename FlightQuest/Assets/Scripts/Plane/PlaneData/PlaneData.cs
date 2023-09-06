@@ -8,6 +8,7 @@ public sealed class PlaneData : ScriptableObject
     [Header("PlaneDescription")]
     public int price;
     public int uniqueCode;
+    public bool gamePurchase;
 
     [Space(20)]
     [Header("PlaneStats")]

@@ -7,8 +7,8 @@ public class Currency
 
     public int TakeCurrency
     {
-        get => PlayerPrefs.GetInt("CurrencyCount");
-        set => PlayerPrefs.SetInt("CurrencyCount", value);
+        get => PlayerPrefs.GetInt(CurrencyCount);
+        set => PlayerPrefs.SetInt(CurrencyCount, value);
     }
 
     public void ShowCurrencyCount(TextMeshProUGUI currentText) => currentText.text = $"{TakeCurrency}$";

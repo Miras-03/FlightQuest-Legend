@@ -29,6 +29,7 @@ public sealed class ExecuteFinishObservers : MonoBehaviour, IDieable
 
     private void OnTriggerEnter()
     {
+        LandingGear.hasExit = true;
         if (!gotIn)
         {
             DestroyFinishLine();

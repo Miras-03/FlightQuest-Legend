@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: PlaneV3Model
   m_EditorClassIdentifier: 
   planeModel: {fileID: 6783042612740966625, guid: 7a4952846ba09894b99aeabfdafb8ec0, type: 3}
-  price: 310
+  price: 2400
   uniqueCode: 1
+  gamePurchase: 1
   speed: 890
   acceleration: 0
   deceleration: 0

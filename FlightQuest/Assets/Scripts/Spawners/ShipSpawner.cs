@@ -3,21 +3,18 @@ using UnityEngine;
 public sealed class ShipSpawner : MonoBehaviour, IFinishable
 {
     [SerializeField] private GameObject prefabToSpawn;
+    [SerializeField] private GameObject airportPlace;
 
-    private int shipCount = 5;
-    private int distance = 4000;
+    private int distance;
+    private const int shipCount = 8;
 
     private const int minX = -500;
     private const int maxX = 500;
     private const int yCoordinate = 0;
     private int zCoordinate = 0;
 
-    private const int finishCount = 16;
-    private const int defaultShipCount = 5;
-    private const int defaultDistance = 2000;
-    private const int startLevel = 1;
+    private const int defaultDistance = 4000;
 
-    private const string ShipCount = nameof(ShipCount);
     private const string ShipDistance = nameof(ShipDistance);
     private const string CurrentLevel = nameof(CurrentLevel);
 
@@ -25,6 +22,7 @@ public sealed class ShipSpawner : MonoBehaviour, IFinishable
 
     private void Start()
     {
+        PlayerPrefs.DeleteKey("ShipCount");
         GetPreviousCount();
 
         randomPosition = new Vector3 (0f, yCoordinate, transform.position.z);
@@ -35,6 +33,10 @@ public sealed class ShipSpawner : MonoBehaviour, IFinishable
             Instantiate(prefabToSpawn, randomPosition, randomRotation);
             randomPosition = GenerateRandomPosition();
         }
+
+        float airPortDistance = randomPosition.z - distance/2;
+        Vector3 airportPosition = new Vector3(0f, 0f, airPortDistance);
+        airportPlace.transform.position = airportPosition;
     }
 
     private Vector3 GenerateRandomPosition()
@@ -51,23 +53,11 @@ public sealed class ShipSpawner : MonoBehaviour, IFinishable
 
     private void SaveLevelState()
     {
-        int currentLevel = PlayerPrefs.GetInt(CurrentLevel, startLevel);
+        GetPreviousCount();
+        distance += 50;
 
-        if (currentLevel % finishCount == 0)
-        {
-            GetPreviousCount();
-
-            shipCount++;
-            distance += 800;
-
-            PlayerPrefs.SetInt(ShipCount, shipCount);
-            PlayerPrefs.SetInt(ShipDistance, distance);
-        }
+        PlayerPrefs.SetInt(ShipDistance, distance);
     }
 
-    private void GetPreviousCount()
-    {
-        shipCount = PlayerPrefs.GetInt(ShipCount, defaultShipCount);
-        distance = PlayerPrefs.GetInt(ShipDistance, defaultDistance);
-    }
+    private void GetPreviousCount() => distance = PlayerPrefs.GetInt(ShipDistance, defaultDistance);
 }

@@ -1,11 +1,16 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject.Asteroids;
 
 public sealed class PlaneDisplay : MonoBehaviour
 {
     [Header("PlaneDescription")]
     [SerializeField] private TextMeshProUGUI price;
+
+    [Space(20)]
+    [Header("Images")]
+    [SerializeField] private Image crystalImage;
 
     [Space(20)]
     [Header("PlaneStats")]
@@ -22,7 +27,14 @@ public sealed class PlaneDisplay : MonoBehaviour
 
     public void DisplayPlane(PlaneData plane)
     {
-        price.text = $"{plane.price}$";
+        crystalImage.enabled = false;
+        if (!plane.gamePurchase)
+            price.text = $"{plane.price}$";
+        else
+        {
+            price.text = $"{plane.price}";
+            crystalImage.enabled = true;
+        }
 
         speed.value = plane.speed;
         acceleration.value = plane.acceleration;
