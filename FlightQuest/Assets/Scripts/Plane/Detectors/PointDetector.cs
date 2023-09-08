@@ -13,7 +13,7 @@ namespace PlaneSection
         private PropellerRotate propellerRotate;
 
         private Slider lever;
-        private AudioSource[] selectionSound;
+        private AudioSource selectionSound;
         [SerializeField] private ParticleSystem selectionEffect;
 
         private Coroutine petrolCoroutine;
@@ -35,7 +35,7 @@ namespace PlaneSection
             this.petrolLevel = petrolLevel;
             this.lever = lever;
             this.propellerRotate = propellerRotate;
-            this.selectionSound = selectionSound;
+            this.selectionSound = selectionSound[9];
 
             plane = GetComponent<AirPlane>();
         }
@@ -76,7 +76,7 @@ namespace PlaneSection
         {
             if (other.CompareTag("Point") && !isFailed)
             {
-                selectionSound[0].Play();
+                selectionSound.Play();
                 selectionEffect.Play();
                 SetValue();
                 Destroy(other.gameObject);

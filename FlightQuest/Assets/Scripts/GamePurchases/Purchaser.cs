@@ -4,6 +4,8 @@ using Zenject;
 
 public class Purchaser : MonoBehaviour
 {
+    private AudioSource moneySound;
+
     private CrystalManager moneyManager;
     private PurchaseInfo purchaseInfo;
 
@@ -16,10 +18,11 @@ public class Purchaser : MonoBehaviour
     private const int crystallsCount = 3000;
 
     [Inject]
-    public void Constructor(CrystalManager moneyManager, PurchaseInfo purchaseInfo)
+    public void Constructor(CrystalManager moneyManager, PurchaseInfo purchaseInfo, AudioSource[] audioSource)
     {
         this.moneyManager = moneyManager;
         this.purchaseInfo = purchaseInfo;
+        moneySound = audioSource[0];
     }
 
     public void OnPurchaseCompleted(Product product)
@@ -37,6 +40,7 @@ public class Purchaser : MonoBehaviour
 
     private void GetCrystalls()
     {
+        moneySound.Play();
         moneyManager.TakeMoney(crystallsCount);
         purchaseInfo.UpdateCrystalCount();
     }

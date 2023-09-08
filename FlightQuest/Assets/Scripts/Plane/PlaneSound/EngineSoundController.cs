@@ -25,12 +25,12 @@ public sealed class EngineSoundController : MonoBehaviour, IDieable
     private bool injected = false;
 
     [Inject]
-    public void Initialize(PrefabInitializationNotifier notifier, AudioSource[] engineSound)
+    public void Initialize(PrefabInitializationNotifier notifier, AudioSource[] engineSounds)
     {
         notifier.OnPrefabInitialized += InjectAfterDelay;
 
         planeIndex = PlayerPrefs.GetInt(SelectedPlane, startSoundPosition) + startSoundPosition;
-        this.engineSound = engineSound[planeIndex];
+        engineSound = engineSounds[planeIndex];
         SetMaxPitch();
     }
 
