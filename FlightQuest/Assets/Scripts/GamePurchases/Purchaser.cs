@@ -10,7 +10,7 @@ public class Purchaser : MonoBehaviour
     private PurchaseInfo purchaseInfo;
 
     private const string noAd = "gamepurchases.removead";
-    private const string gamePurchases = "gamepurchases.getcrystalls";
+    private const string gamePurchases = "gamepurchases.getcrystals";
 
     private const string IsAdRemoved = nameof(IsAdRemoved);
     private const string Crystalls = nameof(Crystalls);

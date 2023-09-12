@@ -4,7 +4,6 @@ using UnityEngine.Advertisements;
 public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
 {
     private InterstitialAd interstitialAd;
-    private RewardedAdButton rewardedAdButton;
 
     private const string androidGameId = "5403455";
     private const string iOSGameId = "5403454";
@@ -15,7 +14,6 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
     private void Awake()
     {
         interstitialAd = GetComponent<InterstitialAd>();
-        rewardedAdButton = GetComponent<RewardedAdButton>();
 
         InitializeAds();
     }

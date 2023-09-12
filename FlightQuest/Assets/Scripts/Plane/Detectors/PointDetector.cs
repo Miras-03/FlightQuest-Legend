@@ -14,14 +14,13 @@ namespace PlaneSection
 
         private Slider lever;
         private AudioSource selectionSound;
-        [SerializeField] private ParticleSystem selectionEffect;
 
         private Coroutine petrolCoroutine;
 
         private float petrolLitres;
 
         private const int startingPetrolLitres = 100;
-        private const float perLiter = 0.01f;
+        private const float perLitre = 0.1f;
         private const int lowPetrolLevel = 0;
 
         private bool isFailed = false;
@@ -50,7 +49,7 @@ namespace PlaneSection
         {
             while (petrolLitres > lowPetrolLevel)
             {
-                yield return new WaitForEndOfFrame();
+                yield return new WaitForFixedUpdate();
                 DecreasePetrolLevel();
             }
 
@@ -62,8 +61,8 @@ namespace PlaneSection
 
         private void DecreasePetrolLevel()
         {
-            petrolLitres -= perLiter;
-            petrolLevel.SetPetrolLevel(perLiter);
+            petrolLitres -= perLitre;
+            petrolLevel.SetPetrolLevel(perLitre);
         }
 
         private IEnumerator WaitForDelay()
@@ -77,7 +76,6 @@ namespace PlaneSection
             if (other.CompareTag("Point") && !isFailed)
             {
                 selectionSound.Play();
-                selectionEffect.Play();
                 SetValue();
                 Destroy(other.gameObject);
 

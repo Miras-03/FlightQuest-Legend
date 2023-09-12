@@ -10,7 +10,7 @@ public sealed class CanisterSpawner : MonoBehaviour, IFinishable
 
     private const int minX = -300;
     private const int maxX = 300;
-    private const int minY = 100;
+    private const int minY = 150;
     private const int maxY = 500;
 
     private const int defaultCanisterCount = 10;
