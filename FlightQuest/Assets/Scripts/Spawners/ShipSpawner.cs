@@ -22,7 +22,6 @@ public sealed class ShipSpawner : MonoBehaviour, IFinishable
 
     private void Start()
     {
-        PlayerPrefs.DeleteKey("ShipCount");
         GetPreviousCount();
 
         randomPosition = new Vector3 (0f, yCoordinate, transform.position.z);

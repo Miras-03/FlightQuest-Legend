@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   noAdButton: {fileID: 1303775585}
+  crystalCount: {fileID: 914880761}
 --- !u!114 &48834595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,7 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   consumePurchase: 1
-  dontDestroyOnLoad: 1
+  dontDestroyOnLoad: 0
   onProductsFetched:
     m_PersistentCalls:
       m_Calls: []
@@ -626,6 +627,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 200462384}
+  - component: {fileID: 200462386}
   - component: {fileID: 200462382}
   - component: {fileID: 200462385}
   m_Layer: 0
@@ -674,6 +676,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f341d24b03bb194fbf56663f47a508b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &200462386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200462381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be9e421325d78244a90b6560857e42a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testMode: 1
 --- !u!1 &229496987
 GameObject:
   m_ObjectHideFlags: 0
@@ -1705,7 +1720,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_RaycastPadding: {x: -8.73, y: -7.1, z: -9.31, w: -8.15}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2646,7 +2661,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28031ceb8450f9743ab0ab28804813b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 914880761}
+  texts:
+  - {fileID: 914880761}
 --- !u!4 &923341409
 Transform:
   m_ObjectHideFlags: 0
@@ -3396,12 +3412,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1280, y: 720}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -4052,7 +4068,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.17400001, y: 0.49778125}
   m_AnchorMax: {x: 0.17400001, y: 0.49778125}
-  m_AnchoredPosition: {x: 1.4999695, y: 3.0000305}
+  m_AnchoredPosition: {x: 1.5, y: 3.0000305}
   m_SizeDelta: {x: 149, y: 148}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1431250910
@@ -5177,7 +5193,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.8485557, y: 0.82500005}
   m_AnchorMax: {x: 0.8485557, y: 0.82500005}
-  m_AnchoredPosition: {x: 0.1000061, y: -0.099975586}
+  m_AnchoredPosition: {x: 0.10003662, y: -0.099975586}
   m_SizeDelta: {x: 100, y: 94}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2071933337

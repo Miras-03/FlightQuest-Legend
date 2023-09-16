@@ -5,13 +5,13 @@ using Zenject;
 public class PurchaseInfo : MonoBehaviour
 {
     [SerializeField] private GameObject noAdButton;
-    private TextMeshProUGUI crystalCount;
+    [SerializeField] private TextMeshProUGUI crystalCount;
 
     private const string IsAdRemoved = nameof(IsAdRemoved);
     private const string Crystalls = nameof(Crystalls);
 
-    [Inject]
-    public void Construct(TextMeshProUGUI crystalCount) => this.crystalCount = crystalCount;
+    //[Inject]
+    //public void Construct(TextMeshProUGUI[] crystalCount) => this.crystalCount = crystalCount[0];
 
     private void Start()
     {

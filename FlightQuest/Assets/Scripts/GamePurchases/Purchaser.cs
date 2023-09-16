@@ -6,7 +6,7 @@ public class Purchaser : MonoBehaviour
 {
     private AudioSource moneySound;
 
-    private CrystalManager moneyManager;
+    private CrystalManager crystalManager;
     private PurchaseInfo purchaseInfo;
 
     private const string noAd = "gamepurchases.removead";
@@ -20,7 +20,7 @@ public class Purchaser : MonoBehaviour
     [Inject]
     public void Constructor(CrystalManager moneyManager, PurchaseInfo purchaseInfo, AudioSource[] audioSource)
     {
-        this.moneyManager = moneyManager;
+        this.crystalManager = moneyManager;
         this.purchaseInfo = purchaseInfo;
         moneySound = audioSource[0];
     }
@@ -41,7 +41,7 @@ public class Purchaser : MonoBehaviour
     private void GetCrystalls()
     {
         moneySound.Play();
-        moneyManager.TakeMoney(crystallsCount);
+        crystalManager.TakeMoney(crystallsCount);
         purchaseInfo.UpdateCrystalCount();
     }
 

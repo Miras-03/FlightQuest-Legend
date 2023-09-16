@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +18,8 @@ namespace PlaneSection
 
         private Coroutine petrolCoroutine;
 
+        public static event Action OnCanisterTaken;
+
         private float petrolLitres;
 
         private const int startingPetrolLitres = 100;
@@ -25,6 +28,7 @@ namespace PlaneSection
 
         private bool isFailed = false;
         private bool hasEntered = false;
+        private bool isTaken = false;
 
         [Inject]
         public void Construct(SceneManager sceneManager, PetrolLevel petrolLevel, Slider lever, 
@@ -59,6 +63,13 @@ namespace PlaneSection
             lever.onValueChanged.RemoveAllListeners();
         }
 
+        private IEnumerator InvokeEvent()
+        {
+            OnCanisterTaken.Invoke();
+            yield return new WaitForSeconds(1);
+            isTaken = !isTaken;
+        }
+
         private void DecreasePetrolLevel()
         {
             petrolLitres -= perLitre;
@@ -82,6 +93,12 @@ namespace PlaneSection
                 if (petrolCoroutine != null)
                     StopCoroutine(petrolCoroutine);
                 petrolCoroutine = StartCoroutine(OffLitresTimer());
+
+                if (!isTaken)
+                {
+                    isTaken = !isTaken;
+                    StartCoroutine(InvokeEvent());
+                }
             }
             else if (other.CompareTag("Finish"))
                 ExecuteLand();

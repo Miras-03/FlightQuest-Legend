@@ -1,9 +1,9 @@
-using System.Data;
 using UnityEngine;
 
 public sealed class CanisterSpawner : MonoBehaviour, IFinishable
 {
     [SerializeField] private GameObject canisterPrefab;
+    [SerializeField] private GameObject airportPlace;
 
     private int canisterCount; 
     private int distance;
@@ -37,6 +37,10 @@ public sealed class CanisterSpawner : MonoBehaviour, IFinishable
             Instantiate(canisterPrefab, randomPosition, Quaternion.identity);
             randomPosition = GenerateRandomPosition();
         }
+
+        float airPortDistance = zCoordinate + defaultDistance;
+        Vector3 airportPosition = new Vector3(0f, 0f, airPortDistance);
+        airportPlace.transform.position = airportPosition;
     }
 
     private Vector3 GenerateRandomPosition()

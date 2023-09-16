@@ -26,8 +26,9 @@ namespace PlaneSection
 
         [Inject]
         public void Contruct(CameraManager cameraManager, Slider speedLever, PropellerRotate propellerRotate, 
-            UIAnimationManager managerOfUIAnimation, CameraStartPosition cameraStartPosition)
+            UIAnimationManager managerOfUIAnimation, CameraStartPosition cameraStartPosition, AirPlane plane)
         {
+            this.plane = plane;
             this.propellerRotate = propellerRotate;
             this.cameraStartPosition = cameraStartPosition;
             this.cameraManager = cameraManager;
@@ -36,7 +37,6 @@ namespace PlaneSection
 
             this.managerOfUIAnimation.OnUIElementsTurnedOn += TurnPointDetectorOn;
 
-            plane = GetComponent<AirPlane>();
             pointDetector = GetComponent<PointDetector>();
 
             this.speedLever.onValueChanged.AddListener(SetAcceleration);
